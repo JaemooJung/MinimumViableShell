@@ -1,42 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msv_split_utils.c                                  :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/28 20:14:49 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/01 12:42:55 by hakim            ###   ########.fr       */
+/*   Created: 2022/03/01 14:34:55 by hakim             #+#    #+#             */
+/*   Updated: 2022/03/01 14:34:56 by hakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "../our_env.c"
+#include "minilibft.c"
 
-bool	m_is_space(char c)
+void	mvs_unset(char **chunk)
 {
-	if (c == SPACE)
-		return (true);
-	return (false);
-}
 
-bool	m_is_quote(char c)
-{
-	if (c == SQUOTE || c == DQUOTE)
-		return (true);
-	return (false);
-}
-
-void	ft_free_split(char **splitted, int index)
-{
-	int	i;
-
-	i = 0;
-	while (i < index)
-	{
-		free(splitted[i]);
-		splitted[i] = 0;
-		++i;
-	}
-	free(splitted);
-	splitted = 0;
 }

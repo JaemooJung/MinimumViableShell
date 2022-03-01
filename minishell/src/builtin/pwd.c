@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msv_split_utils.c                                  :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/28 20:14:49 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/01 12:42:55 by hakim            ###   ########.fr       */
+/*   Created: 2022/03/01 14:34:35 by hakim             #+#    #+#             */
+/*   Updated: 2022/03/01 14:34:36 by hakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "minilibft.c"
 
-bool	m_is_space(char c)
+void	mvs_pwd(char **chunk)
 {
-	if (c == SPACE)
-		return (true);
-	return (false);
+	char *currentDir = getcwd(NULL, 0);
+	printf("%s\n", currentDir);
+	free(currentDir);
+	currentDir = NULL;
 }
-
-bool	m_is_quote(char c)
+/*
+int main(void)
 {
-	if (c == SQUOTE || c == DQUOTE)
-		return (true);
-	return (false);
-}
+	char *chunk[2];
 
-void	ft_free_split(char **splitted, int index)
-{
-	int	i;
-
-	i = 0;
-	while (i < index)
-	{
-		free(splitted[i]);
-		splitted[i] = 0;
-		++i;
-	}
-	free(splitted);
-	splitted = 0;
+	chunk[0] = "pwd";
+	chunk[1] = 0;
+	mvs_pwd(chunk);
+	system("leaks pwd");
 }
+*/
