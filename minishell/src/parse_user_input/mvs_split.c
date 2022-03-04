@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msv_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 20:14:38 by hakim             #+#    #+#             */
-/*   Updated: 2022/02/28 20:14:42 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/01 14:22:31 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,10 @@ static int	put_word(const char *src, char *dst, int i)
 	return (srcdex);
 }
 
-static void	do_split(const char *s, char **words, int size)
+static void	do_split(const char *s, char **words)
 {
 	int		i;
 	int		wordex;
-	char	flag;
 
 	i = 0;
 	wordex = 0;
@@ -116,6 +115,6 @@ char	**mvs_split(char const *s)
 	if (words == 0)
 		return (0);
 	words[size] = 0;
-	do_split(s, words, size);
+	do_split(s, words);
 	return (words);
 }

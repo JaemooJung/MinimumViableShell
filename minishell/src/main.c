@@ -1,7 +1,11 @@
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	printf("Hello, world!\n");
-	printf("hello, minishell!\n");
+	t_ast_node	*tree;
+
+	argc++;
+	tree = NULL;
+	if (parse_user_input(argv[1], &tree))
+		return (1);
 }

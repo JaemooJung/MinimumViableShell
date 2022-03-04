@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msv_split_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 20:14:49 by hakim             #+#    #+#             */
-/*   Updated: 2022/02/28 20:14:50 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/01 14:23:18 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	m_is_space(char c)
 {
-	if (c == SPACE || (9 <= c && c <= 13))
+	if (c == SPACE)
 		return (true);
 	return (false);
 }
