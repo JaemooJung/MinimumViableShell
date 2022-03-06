@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 22:13:45 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/03 01:02:45 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/06 19:52:32 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int _print_t(t_ast_node *tree, int is_left, int offset, int depth, char s[20][25
 
     if (!tree) return 0;
 
-    sprintf(b, "(%s)", tree->token->value);
+    sprintf(b, "(%s)", tree->content);
 
     int left  = _print_t(tree->left,  1, offset,                depth + 1, s);
     int right = _print_t(tree->right, 0, offset + left + width, depth + 1, s);

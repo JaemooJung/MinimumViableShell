@@ -10,6 +10,7 @@ FILES 		=	main.c \
 				parse_user_input/mvs_split.c \
 				parse_user_input/lexer.c \
 				parse_user_input/parser.c \
+				parse_user_input/parser_utils.c \
 				parse_user_input/tree_utils.c \
 				debug/debug_print.c \
 
