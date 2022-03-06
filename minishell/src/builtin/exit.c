@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "minilibft.c"
 
-static bool is_white_space(char c)
+static bool	is_white_space(char c)
 {
 	if (c == ' ' || (c >= 9 && c <= 13))
 		return (true);
@@ -40,48 +39,39 @@ static bool	can_be_atoied(char *str)
 	return (false);
 }
 
-void	dequote(char *str)
+t_stat	mvs_exit(char **chunk, t_list *env)
 {
 	int	i;
 
-	if (!(str[0] == '\"' && str[ft_strlen(str) - 1] == '\"'))
-		return ;
-	i = 1;
-	while (i < ft_strlen(str) - 1)
-	{
-		str[i - 1] = str[i];
-		++i;
-	}
-	str[i] = '\0';
-}
-
-void	mvs_exit(char **chunk)
-{
-	int 	i;
-
+	(void)env;
 	i = 0;
 	while (chunk[i] != NULL)
 		i++;
 	if (i == 1)
+	{
+		ft_putstr_fd("exit\n", 1);
 		exit(EXIT_SUCCESS);
+	}
 	if (i > 2)
-		return (ft_putstr_fd("mvshell: exit: too many arguments", 2));
-	dequote(chunk[1]);
-	printf("%s\n", chunk[1]);
+	{
+		ft_putstr_fd("exit\nminishell: exit: too many arguments", 2);
+		return (FAILURE);
+	}
+	dequote(chunk[1]); // will be performed while parsing, so have to be deleted
 	if (can_be_atoied(chunk[1]) == false)
 	{
-		ft_putstr_fd("mvshell: exit: abc: numeric argument required", 2);
+		ft_putstr_fd("exit\nminishell: exit: abc: numeric argument required", 2);
 		exit(255);
 	}
-	else
-		exit(ft_atoi(chunk[1]));
+	ft_putstr_fd("exit\n", 1);
+	exit(ft_atoi(chunk[1]));
 }
+
 /*
 int main(void)
 {
 	char **chunk = mvs_split("exit \"    2055    \"");
-	printf("%s\n", chunk[0]);
-	printf("%s\n", chunk[1]);
+//	printf("%s\n", chunk[0]);
+//	printf("%s\n", chunk[1]);
 	mvs_exit(chunk);
-}
- */
+}*/

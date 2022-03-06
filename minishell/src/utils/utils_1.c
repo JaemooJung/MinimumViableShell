@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minilibft.c                                        :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:30:37 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/01 16:31:57 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/06 21:33:45 by hakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,19 @@ int	ft_atoi(const char *str)
 	else if (result > 9223372036854775808ULL && plma == -1)
 		return (0);
 	return ((int)result * plma);
+}
+
+void	dequote(char *str)
+{
+	int	i;
+
+	if (!(str[0] == '\"' && str[ft_strlen(str) - 1] == '\"'))
+		return ;
+	i = 1;
+	while (i < ft_strlen(str) - 1)
+	{
+		str[i - 1] = str[i];
+		++i;
+	}
+	str[i] = '\0';
 }

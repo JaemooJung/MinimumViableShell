@@ -12,73 +12,72 @@
 
 #include "minishell.h"
 
-typedef struct s_list
-{
-	struct s_list	*next;
-	char			*line;
-}	t_list;
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (lst == 0)
-		return (lst);
-	while (lst->next != 0)
-		lst = lst->next;
-	return (lst);
-}
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	if (lst == 0 || new == 0)
-		return ;
-	if (*lst == 0)
-	{
-		*lst = new;
-		return ;
-	}
-	ft_lstlast(*lst)->next = new;
-}
-
-t_list	*ft_lstnew(char *line)
-{
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (new == 0)
-		return (0);
-	new->line = line;
-	new->next = 0;
-	return (new);
-}
-
-void	ft_printlist(t_list *lst)
-{
-	if (lst == 0)
-		return ;
-	while (lst != 0)
-	{
-		printf("%s\n", lst->line);
-		lst = lst->next;
-	}
-}
-
 t_list	*envp_to_ours(char **envp)
 {
 	t_list	*head;
-	int 	index;
+	t_list	*cur;
+	char	*line;
+	int		index;
 
 	index = 0;
-	head = ft_lstnew(envp[index++]);
+	line = ft_strdup(envp[index++]);
+	if (line == NULL)
+		return (NULL);
+	head = ft_lstnew(line);
+	if (head == NULL)
+		return (ft_free_str(line));
+	cur = head;
 	while (envp[index] != NULL)
-		ft_lstadd_back(&head, ft_lstnew(envp[index++]));
+	{
+		line = ft_strdup(envp[index++]);
+		if (line == NULL)
+			return (ft_free_lst(head));
+		ft_lstadd_back(&head, ft_lstnew(line));
+		cur = cur->next;
+		if (cur == NULL)
+			return (ft_free_lst(head));
+	}
 	return (head);
 }
+// when return NULL, should minishell_exit with error message??
 
-//int main(int ac, char **av, char **envp)
+char	*get_value(t_list *env, char *key)
+{
+	size_t	len;
+
+	while (env != NULL)
+	{
+		len = ft_strlen(key);
+		if (ft_strncmp(env->line, key, len) == 0 && env->line[len] == '=')
+			return (env->line + len + 1);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+//void	ft_printlist(t_list *lst)
 //{
-//	t_list *our_env;
-//
-//	our_env = envp_to_ours(envp);
-//	ft_printlist(our_env);
+//	if (lst == 0)
+//		return ;
+//	while (lst != 0)
+//	{
+//		printf("%s\n", lst->line);
+//		lst = lst->next;
+//	}
 //}
+//
+/*int main(int ac, char **av, char **envp)
+{
+	t_list *our_env;
+	char **hihi;
 
+	our_env = envp_to_ours(envp);
+	printf("%s\n", our_env);
+//	our_env = ft_lstnew("aa");
+//	ft_lstadd_back(&our_env, ft_lstnew("bb"));
+//	ft_lstadd_back(&our_env, ft_lstnew("cc"));
+//	ft_lstadd_back(&our_env, ft_lstnew("dd"));
+//	ft_lstadd_back(&our_env, ft_lstnew("ee"));
+//	ft_printlist(our_env);
+//	ft_printlist(our_env);
+}*/
