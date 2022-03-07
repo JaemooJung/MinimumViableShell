@@ -69,3 +69,18 @@ t_list	*sort_list(t_list *lst, int (*cmp)(const char *, const char *, size_t))
 	}
 	return (lst);
 }
+
+size_t	ft_lstsize(t_list *lst)
+{
+	size_t	size;
+
+	if (lst == 0)
+		return (0);
+	size = 0;
+	while (lst != NULL)
+	{
+		++size;
+		lst = lst->next;
+	}
+	return (size);
+}

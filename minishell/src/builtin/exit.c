@@ -67,11 +67,13 @@ t_stat	mvs_exit(char **chunk, t_list *env)
 	exit(ft_atoi(chunk[1]));
 }
 
-/*
 int main(void)
 {
-	char **chunk = mvs_split("exit \"    2055    \"");
+	char **chunk = mvs_split("exit \"world");
+	int index = 0;
+	while (chunk[index] != NULL)
+		printf("%s\n", chunk[index++]);
 //	printf("%s\n", chunk[0]);
 //	printf("%s\n", chunk[1]);
-	mvs_exit(chunk);
-}*/
+//	mvs_exit(chunk);
+}

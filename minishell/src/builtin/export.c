@@ -99,8 +99,7 @@ t_stat	mvs_export(char **chunk, t_list *env)
 	return (exit_status);
 }
 
-/*
-int main(int ac, char **av, char **envp)
+/*int main(int ac, char **av, char **envp)
 {
 	t_list	*env = envp_to_ours(envp);//ft_lstnew(NULL);//envp_to_ours(envp);
 	char	*chunk[8];

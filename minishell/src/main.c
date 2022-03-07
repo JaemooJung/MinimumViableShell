@@ -15,8 +15,7 @@ void	minimum_viable_shell(t_list *env)
 		add_history(cmdline);
 //	token = parse(cmdline);
 //	run_tokens(token);
-	free(cmdline);
-	cmdline = NULL;
+	ft_free_str(cmdline);
 }
 
 void run_tokens(void)

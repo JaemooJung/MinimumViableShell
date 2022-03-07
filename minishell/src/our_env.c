@@ -55,6 +55,26 @@ char	*get_value(t_list *env, char *key)
 	return (NULL);
 }
 
+char	**to_vector(t_list *env)
+{
+	size_t	size;
+	size_t	index;
+	char	**envp;
+
+	size = ft_lstsize(env);
+	envp = malloc(sizeof(char *) * (size + 1));
+	if (envp == NULL)
+		return (NULL);
+	index = 0;
+	while (index < size)
+	{
+		envp[index++] = env->line;
+		env = env->next;
+	}
+	envp[size] = NULL;
+	return (envp);
+}
+
 //void	ft_printlist(t_list *lst)
 //{
 //	if (lst == 0)
