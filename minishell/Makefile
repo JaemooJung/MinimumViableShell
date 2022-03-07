@@ -1,7 +1,9 @@
 NAME 		=	minishell
 
 CC 			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	
+READLINE	=	-L/usr/local/opt/readline/lib -lreadline -I/usr/local/opt/readline/include
+
 RM			=	rm -f
 
 FILES 		=	main.c \
@@ -14,6 +16,20 @@ FILES 		=	main.c \
 				parse_user_input/parser_utils.c \
 				parse_user_input/parser_utils_2.c \
 				parse_user_input/tree_utils.c \
+				builtin/cd.c \
+				builtin/echo.c \
+				builtin/env.c \
+				builtin/exit.c \
+				builtin/export_append.c \
+				builtin/export.c \
+				builtin/pwd.c \
+				builtin/unset.c \
+				utils/list_1.c \
+				utils/list_2.c \
+				utils/utils_1.c \
+				utils/utils_2.c \
+				utils/utils_3.c \
+				our_env.c \
 				debug/debug_print.c \
 
 SRC_DIR		=	./src/
@@ -30,7 +46,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c -o $@ $<
 
 $(NAME): $(OBJS)
-	$(CC) -o $@ $^
+	$(CC) $(READLINE) -o $@ $^
 
 clean:
 	$(RM) $(OBJS)

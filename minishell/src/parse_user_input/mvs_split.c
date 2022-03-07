@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 static int	wordcount(char const *s, int i)
