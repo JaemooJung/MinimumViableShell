@@ -31,23 +31,21 @@ static int	wordcount(char const *s, int i)
 static int	get_word_size(const char *s, int i)
 {
 	char	flag;
-	int 	size;
 
-	size = 0;
 	while (m_is_space(s[i]) == true)
 		i++;
-	if (m_is_quote(s[i + size]) == true)
+	if (m_is_quote(s[i]) == true)
 	{
-		flag = s[i + size++];
-		while (s[i + size] != flag)
-			++size;
-		++size;
+		flag = s[i++];
+		while (s[i] != flag)
+			++i;
+		++i;
 	}
 	else
-		while ((m_is_space(s[i + size]) == false && m_is_quote(s[i + size]) == false)
-			&& s[i + size] != '\0')
-			++size;
-	return (size);
+		while ((m_is_space(s[i]) == false && m_is_quote(s[i]) == false)
+			&& s[i] != '\0')
+			++i;
+	return (i);
 }
 
 static int	put_word(const char *src, char *dst, int i)
@@ -83,12 +81,12 @@ static void	do_split(const char *s, char **words, int size)
 	wordex = 0;
 	while (s[i] != '\0' && wordex < size)
 	{
-		words[wordex] = malloc(sizeof(char) * get_word_size(s, i));
-		if (words[wordex] == 0)
-			return (ft_free_split(words, wordex));
 		while (s[i] != '\0' && \
 			(m_is_space(s[i]) == true && m_is_quote(s[i]) == false))
 			i++;
+		words[wordex] = malloc(sizeof(char) * get_word_size(s, i));
+		if (words[wordex] == 0)
+			return (ft_free_split(words, wordex));
 		i = put_word(s, words[wordex], i);
 		wordex++;
 	}
