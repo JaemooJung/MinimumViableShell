@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 22:38:50 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/06 22:54:05 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/07 15:28:23 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_command(t_ast_node **root, t_token **tokens)
 	*root = ast_insert_node(*root, command, RIGHT);
 	if ((*tokens)->type == T_WORD)
 	{
-		file_path = make_ast_node(NODE_FILE_PATH, ft_strdup((*tokens)->value));
+		file_path = make_ast_node(NODE_FILE_PATH, j_strdup((*tokens)->value));
 		argv = make_ast_node(NODE_ARGV, make_argv(tokens));
 		if (file_path->content == NULL || argv->content == NULL)
 			return (1);
@@ -49,7 +49,7 @@ int	parse_io_redirect(t_ast_node **root, t_token **tokens)
 	if ((*tokens)->type == T_REDIRECTION)
 	{
 		redir_type = make_ast_node(NODE_REDIR_TYPE,
-				ft_strdup((*tokens)->value));
+				j_strdup((*tokens)->value));
 		(*tokens)++;
 		file_name = make_ast_node(NODE_FILE_NAME, make_argv(tokens));
 		io_redirect->left = redir_type;

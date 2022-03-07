@@ -6,13 +6,13 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 17:06:32 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/06 22:57:13 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/07 15:27:19 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+static size_t	ft_strlen(const char *str)
 {
 	size_t	len;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+static size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	src_len;
@@ -42,7 +42,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (src_len);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+static size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	s_len;
@@ -64,7 +64,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (d_len + s_len);
 }
 
-char	*ft_strdup(const char *s1)
+char	*j_strdup(const char *s1)
 {
 	char	*rtn;
 	size_t	s1_len;
@@ -77,7 +77,7 @@ char	*ft_strdup(const char *s1)
 	return (rtn);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*j_strjoin(char const *s1, char const *s2)
 {
 	char	*rtn;
 	int		s1_len;
