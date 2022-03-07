@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 17:48:43 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/06 20:15:38 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/06 22:56:46 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_ast_node	*make_ast_node(int node_type, char *content)
 {
 	t_ast_node	*node;
 
-	if (!(node = (t_ast_node *)malloc(sizeof(t_ast_node))))
+	node = (t_ast_node *)malloc(sizeof(t_ast_node));
+	if (node == NULL)
 		return (NULL);
 	node->node_type = node_type;
 	node->content = content;

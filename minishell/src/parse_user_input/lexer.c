@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:34:02 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/03 00:44:15 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/06 22:55:04 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_vector_size(char **vector)
 	return (i);
 }
 
-static int get_token_type(char *token)
+static int	get_token_type(char *token)
 {
 	if (token[0] == '|')
 		return (T_PIPE);
@@ -34,12 +34,17 @@ static int get_token_type(char *token)
 		return (T_WORD);
 }
 
+/*
+*	parameter	: splitted user input (char **), token address (t_token **)
+*	description : 
+*	return		: 0 if success, 1 if fail
+*/
 int	lexer(char **splitted, t_token **tokens)
 {
 	int	i;
 
-	*tokens = (t_token *)malloc(sizeof(t_token) 
-		* (get_vector_size(splitted) + 1));
+	*tokens = (t_token *)malloc(sizeof(t_token)
+			* (get_vector_size(splitted) + 1));
 	if (!(*tokens))
 		return (MALLOC_ERROR);
 	i = 0;

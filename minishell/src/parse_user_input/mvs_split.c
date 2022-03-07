@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msv_split.c                                        :+:      :+:    :+:   */
+/*   mvs_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 20:14:38 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/01 14:22:31 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/07 13:19:22 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static int	wordcount(char const *s, int i)
 		if (m_is_quote(s[i]) == true)
 		{
 			flag = s[i++];
-			while (s[i] != flag)
+			while (s[i] != flag && s[i] != '\0')
 				++i;
+			if (s[i] == '\0')
+				return (count);
 			++i;
 		}
 		else
@@ -71,7 +73,7 @@ static int	put_word(const char *src, char *dst, int i)
 	{
 		flag = src[srcdex];
 		dst[dstdex++] = src[srcdex++];
-		while (src[srcdex] != flag)
+		while (src[srcdex] != flag && src[srcdex] != '\0')
 			dst[dstdex++] = src[srcdex++];
 		dst[dstdex++] = src[srcdex++];
 	}
@@ -83,14 +85,14 @@ static int	put_word(const char *src, char *dst, int i)
 	return (srcdex);
 }
 
-static void	do_split(const char *s, char **words)
+static void	do_split(const char *s, char **words, int size)
 {
 	int		i;
 	int		wordex;
 
 	i = 0;
 	wordex = 0;
-	while (s[i] != '\0')
+	while (s[i] != '\0' && wordex < size)
 	{
 		words[wordex] = malloc(sizeof(char) * get_word_size(s, i));
 		if (words[wordex] == 0)
@@ -115,6 +117,6 @@ char	**mvs_split(char const *s)
 	if (words == 0)
 		return (0);
 	words[size] = 0;
-	do_split(s, words);
+	do_split(s, words, size);
 	return (words);
 }
