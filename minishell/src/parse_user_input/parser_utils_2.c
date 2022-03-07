@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 22:41:08 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/06 22:57:08 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/07 15:27:49 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*conv_str_join(char *argv, char *new_str)
 	char	*tmp;
 
 	tmp = argv;
-	argv = ft_strjoin(argv, new_str);
+	argv = j_strjoin(argv, new_str);
 	if (argv == NULL)
 		return (NULL);
 	if (tmp != NULL)

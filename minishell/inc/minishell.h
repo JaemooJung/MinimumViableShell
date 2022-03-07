@@ -47,8 +47,6 @@ t_stat	mvs_unset(char **chunk, t_list *env);
 
 /* utils */
 size_t	ft_strlen(const char *str);
-bool	m_is_space(char c);
-bool	m_is_quote(char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -60,10 +58,8 @@ int		ft_isalnum(int c);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_print_error(char *cmd, char *arg, char *error);
-void	ft_free_split(char **splitted, int index);
 void	*ft_free_str(char *str);
 void	dequote(char *str);
-char	**mvs_split(char const *s);
 
 /* list */
 t_list	*ft_lstnew(char *line);
