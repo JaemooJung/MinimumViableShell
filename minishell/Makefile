@@ -5,7 +5,16 @@ CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -f
 
 FILES 		=	main.c \
-				msv_
+				parse_user_input/parse_user_input.c \
+				parse_user_input/mvs_split_utils.c \
+				parse_user_input/mvs_split.c \
+				parse_user_input/lexer.c \
+				parse_user_input/parser.c \
+				parse_user_input/parser_funcs.c \
+				parse_user_input/parser_utils.c \
+				parse_user_input/parser_utils_2.c \
+				parse_user_input/tree_utils.c \
+				debug/debug_print.c \
 
 SRC_DIR		=	./src/
 INC_DIR		=	./inc

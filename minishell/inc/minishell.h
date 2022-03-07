@@ -8,9 +8,14 @@
 # include <sys/errno.h>
 # include <unistd.h>
 
+# include "parse_user_input.h"
+# include "debug.h"
+
 # define SPACE ' '
 # define SQUOTE '\''
 # define DQUOTE '\"'
+
+# define MALLOC_ERROR 1
 
 typedef struct s_list
 {

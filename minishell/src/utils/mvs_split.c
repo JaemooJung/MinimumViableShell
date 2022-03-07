@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mvs_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 20:14:38 by hakim             #+#    #+#             */
+<<<<<<<< HEAD:minishell/src/parse_user_input/mvs_split.c
+/*   Updated: 2022/03/07 13:19:22 by jaemoojung       ###   ########.fr       */
+========
 /*   Updated: 2022/03/06 21:33:44 by hakim            ###   ########.fr       */
+>>>>>>>> main:minishell/src/utils/mvs_split.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +32,16 @@ static int	wordcount(char const *s, int i)
 		{
 			flag = s[i++];
 			while (s[i] != flag && s[i] != '\0')
+<<<<<<<< HEAD:minishell/src/parse_user_input/mvs_split.c
+				++i;
+			if (s[i] == '\0')
+				return (count);
+			++i;
+========
 				++i;
 			if (s[i] != '\0')
 				++i;
+>>>>>>>> main:minishell/src/utils/mvs_split.c
 		}
 		else
 			while (s[i] != '\0' && \

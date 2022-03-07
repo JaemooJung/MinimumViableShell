@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mvs_split_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 20:14:49 by hakim             #+#    #+#             */
+<<<<<<<< HEAD:minishell/src/parse_user_input/mvs_split_utils.c
+/*   Updated: 2022/03/01 14:23:18 by jaemoojung       ###   ########.fr       */
+========
 /*   Updated: 2022/03/06 21:33:45 by hakim            ###   ########.fr       */
+>>>>>>>> main:minishell/src/utils/mvs_split_utils.c
 /*                                                                            */
 /* ************************************************************************** */
 
