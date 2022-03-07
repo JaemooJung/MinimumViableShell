@@ -12,17 +12,23 @@
 
 #include "minishell.h"
 
-void	mvs_env(char **envp)
+t_stat	mvs_env(char **chunk, t_list *env)
 {
-	int i;
-
-	i = 0;
-	while (envp[i] != NULL)
-		printf("%s\n", envp[i++]);
+	(void)chunk;
+	while (env != NULL)
+	{
+		if (ft_strchr(env->line, '=') != NULL)
+			printf("%s\n", env->line);
+		env = env->next;
+	}
+	return (SUCCESS);
 }
+
 /*
 int main(int ac, char **av, char **envp)
 {
-	mvs_env(envp);
-}
- */
+	t_list *env;
+
+	env = envp_to_ours(envp);
+	mvs_env(env);
+}*/

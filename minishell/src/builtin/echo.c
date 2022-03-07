@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-bool	is_valid_opt(const char *arg, bool *nlflag, bool *optflag)
+static bool	is_valid_opt(const char *arg, bool *nlflag, bool *optflag)
 {
 	int	index;
 
@@ -36,12 +36,13 @@ bool	is_valid_opt(const char *arg, bool *nlflag, bool *optflag)
 }
 
 /* input should include the command, 'echo' */
-void	mvs_echo(char **chunk)
+t_stat	mvs_echo(char **chunk, t_list *env)
 {
 	bool	nlflag;
 	bool	optflag;
 	int		index;
 
+	(void)env;
 	index = 1;
 	nlflag = true;
 	optflag = true;
@@ -57,14 +58,15 @@ void	mvs_echo(char **chunk)
 	}
 	if (nlflag == true)
 		printf("\n");
+	return (SUCCESS);
 }
 
 /*
 int	main(void)
 {
-	char *str = "echo -n -nnnnnn 15345 -n 1345 -n -n -n-n-n 123123 585145";
+	char *str = "echo";// -n -nnnnnn 15345 -n 1345 -n -n -n-n-n 123123 585145";
 	char **splitted = mvs_split(str);
-	mvs_echo(splitted);
+	mvs_echo(splitted, NULL);
 	exit(13);
 }
 */
