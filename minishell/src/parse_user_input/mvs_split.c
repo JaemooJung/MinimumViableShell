@@ -31,19 +31,23 @@ static int	wordcount(char const *s, int i)
 static int	get_word_size(const char *s, int i)
 {
 	char	flag;
+	int 	size;
 
-	if (m_is_quote(s[i]) == true)
+	size = 0;
+	while (m_is_space(s[i]) == true)
+		i++;
+	if (m_is_quote(s[i + size]) == true)
 	{
-		flag = s[i++];
-		while (s[i] != flag)
-			++i;
-		++i;
+		flag = s[i + size++];
+		while (s[i + size] != flag)
+			++size;
+		++size;
 	}
 	else
-		while ((m_is_space(s[i]) == false && m_is_quote(s[i]) == false)
-			&& s[i] != '\0')
-			++i;
-	return (i);
+		while ((m_is_space(s[i + size]) == false && m_is_quote(s[i + size]) == false)
+			&& s[i + size] != '\0')
+			++size;
+	return (size);
 }
 
 static int	put_word(const char *src, char *dst, int i)
