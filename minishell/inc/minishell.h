@@ -7,6 +7,8 @@
 # include <string.h>
 # include <sys/errno.h>
 # include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # include "parse_user_input.h"
 # include "debug.h"
@@ -69,5 +71,6 @@ t_list	*sort_list(t_list *lst, int (*cmp)(const char *, const char *, size_t));
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	delete_node(t_list *lst);
 void	*ft_free_lst(t_list *lst);
+size_t	ft_lstsize(t_list *lst);
 
 #endif
