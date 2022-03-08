@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 22:41:08 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/07 19:29:10 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/08 18:41:02 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*conv_str_join(char *argv, char *new_str)
 
 	tmp = argv;
 	argv = j_strjoin(argv, new_str);
-	printf("str to join: %s\n", new_str);
-	printf("after strjoin: %s\n", argv);
 	if (argv == NULL)
 		return (NULL);
 	if (tmp != NULL)
@@ -35,18 +33,15 @@ char	*make_argv(t_token **tokens)
 	char	*argv;
 
 	argv = NULL;
-	printf("before go to conv_str_join: %s\n", (*tokens)[1].value);
 	while ((*tokens)->type == T_WORD)
 	{
-		printf("token to join : %s\n", (*tokens)->value);
 		argv = conv_str_join(argv, (*tokens)->value);
 		if (argv == NULL)
 			return (NULL);
 		if ((*tokens)[1].type == T_WORD)
-			argv = conv_str_join(argv, "*");
+			argv = conv_str_join(argv, " ");
 		if (argv == NULL)
 			return (NULL);
-		//printf("argv made : %s\n", argv);
 		(*tokens)++;
 	}
 	return (argv);
@@ -56,7 +51,7 @@ void	print_parsed(t_ast_node *tree)
 {
 	if (tree)
 	{
-		printf("value: %s\n", tree->content);
+		printf("type: %2d\t value: %s\n", tree->node_type, tree->content);
 		print_parsed(tree->left);
 		print_parsed(tree->right);
 	}

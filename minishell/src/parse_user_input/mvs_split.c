@@ -32,6 +32,8 @@ static int	get_word_size(const char *s, int i)
 {
 	char	flag;
 
+	while (m_is_space(s[i]) == true)
+		i++;
 	if (m_is_quote(s[i]) == true)
 	{
 		flag = s[i++];
@@ -79,12 +81,12 @@ static void	do_split(const char *s, char **words, int size)
 	wordex = 0;
 	while (s[i] != '\0' && wordex < size)
 	{
-		words[wordex] = malloc(sizeof(char) * get_word_size(s, i));
-		if (words[wordex] == 0)
-			return (ft_free_split(words, wordex));
 		while (s[i] != '\0' && \
 			(m_is_space(s[i]) == true && m_is_quote(s[i]) == false))
 			i++;
+		words[wordex] = malloc(sizeof(char) * get_word_size(s, i));
+		if (words[wordex] == 0)
+			return (ft_free_split(words, wordex));
 		i = put_word(s, words[wordex], i);
 		wordex++;
 	}

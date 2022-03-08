@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   our_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 17:53:50 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/01 17:53:52 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/08 23:40:14 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,17 @@ char	**to_vector(t_list *env)
 	return (envp);
 }
 
-//void	ft_printlist(t_list *lst)
-//{
-//	if (lst == 0)
-//		return ;
-//	while (lst != 0)
-//	{
-//		printf("%s\n", lst->line);
-//		lst = lst->next;
-//	}
-//}
-//
+void	ft_printlist(t_list *lst)
+{
+	if (lst == 0)
+		return ;
+	while (lst != 0)
+	{
+		printf("%s\n", lst->line);
+		lst = lst->next;
+	}
+}
+
 /*int main(int ac, char **av, char **envp)
 {
 	t_list *our_env;

@@ -11,21 +11,12 @@ void	minimum_viable_shell(t_list *env)
 		return ;
 	if (cmdline[0] != '\0')
 		add_history(cmdline);
-	if (parse_user_input(cmdline, &tree))
+	if (parse_user_input(cmdline, &tree, env))
 		return ;
 	print_parsed(tree);
-	//	token = parse(cmdline);
-	//	run_tokens(token);
-	//free token, 
-	//free tree;
+	//run_tokens(tree, env);
+	clear_ast(tree);
 	ft_free_str(cmdline);
-}
-
-void run_tokens(void)
-{
-	/*
-	 만약에 파이프가 있다면 -> ast 현재 노드의 오른쪽 노드가 존재한다
-	 */
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -35,7 +26,6 @@ int	main(int argc, char **argv, char **envp)
 	printf("Hello, world!\n");
 	printf("hello, minishell!\n");
 //	setup_signals();
-
 	our_env = envp_to_ours(envp);
 	while (1)
 	{

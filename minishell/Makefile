@@ -3,7 +3,7 @@ NAME 		=	minishell
 CC 			=	gcc
 CFLAGS		=	-g
 READLINE	=	-L/usr/local/opt/readline/lib -lreadline -I/usr/local/opt/readline/include
-
+#READLINE	=	-L/opt/homebrew/opt/readline/lib -lreadline -I/opt/homebrew/opt/readline/include
 RM			=	rm -f
 
 FILES 		=	main.c \
@@ -16,6 +16,7 @@ FILES 		=	main.c \
 				parse_user_input/parser_utils.c \
 				parse_user_input/parser_utils_2.c \
 				parse_user_input/tree_utils.c \
+				parse_user_input/expand_env.c \
 				builtin/cd.c \
 				builtin/echo.c \
 				builtin/env.c \
@@ -24,6 +25,7 @@ FILES 		=	main.c \
 				builtin/export.c \
 				builtin/pwd.c \
 				builtin/unset.c \
+				utils/ft_split.c \
 				utils/list_1.c \
 				utils/list_2.c \
 				utils/utils_1.c \
@@ -31,6 +33,7 @@ FILES 		=	main.c \
 				utils/utils_3.c \
 				our_env.c \
 				debug/debug_print.c \
+				exec/redirection.c \
 
 SRC_DIR		=	./src/
 INC_DIR		=	./inc
