@@ -1,7 +1,7 @@
 NAME 		=	minishell
 
 CC 			=	gcc
-CFLAGS		=	
+CFLAGS		=	-g
 READLINE	=	-L/usr/local/opt/readline/lib -lreadline -I/usr/local/opt/readline/include
 #READLINE	=	-L/opt/homebrew/opt/readline/lib -lreadline -I/opt/homebrew/opt/readline/include
 RM			=	rm -f
@@ -16,6 +16,7 @@ FILES 		=	main.c \
 				parse_user_input/parser_utils.c \
 				parse_user_input/parser_utils_2.c \
 				parse_user_input/tree_utils.c \
+				parse_user_input/expand_env.c \
 				builtin/cd.c \
 				builtin/echo.c \
 				builtin/env.c \
