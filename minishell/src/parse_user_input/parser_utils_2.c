@@ -51,7 +51,7 @@ void	print_parsed(t_ast_node *tree)
 {
 	if (tree)
 	{
-		printf("value: %s\n", tree->content);
+		printf("type: %2d\t value: %s\n", tree->node_type, tree->content);
 		print_parsed(tree->left);
 		print_parsed(tree->right);
 	}
