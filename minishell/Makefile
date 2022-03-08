@@ -1,7 +1,7 @@
 NAME 		=	minishell
 
 CC 			=	gcc
-CFLAGS		=	
+CFLAGS		=	-g
 READLINE	=	-L/usr/local/opt/readline/lib -lreadline -I/usr/local/opt/readline/include
 
 RM			=	rm -f

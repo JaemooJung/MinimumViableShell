@@ -17,8 +17,6 @@
 # define SQUOTE '\''
 # define DQUOTE '\"'
 
-# define MALLOC_ERROR 1
-
 typedef struct s_list
 {
 	struct s_list	*next;
