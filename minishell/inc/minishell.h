@@ -67,16 +67,16 @@ typedef struct s_necessities
 /* envp friends */
 t_list	*envp_to_ours(char **envp);
 char	*get_value(t_list *env, char *key);
-t_stat	append_to_env(t_list *env, char *str);
+int	append_to_env(t_list *env, char *str);
 char	**to_vector(t_list *env);
 /* builtins */
-t_stat	mvs_echo(char **chunk, t_list *env);
-t_stat	mvs_exit(char **chunk, t_list *env); // is whitespace func necessary? + dequote have to be removed after parsing done
-t_stat	mvs_cd(char **chunk, t_list *env); // error handling to be done
-t_stat	mvs_pwd(char **chunk, t_list *env);
-t_stat	mvs_env(char **chunk, t_list *env);
-t_stat	mvs_export(char **chunk, t_list *env);
-t_stat	mvs_unset(char **chunk, t_list *env);
+int	mvs_echo(char **chunk, t_list *env);
+int	mvs_exit(char **chunk, t_list *env); // is whitespace func necessary? + dequote have to be removed after parsing done
+int	mvs_cd(char **chunk, t_list *env); // error handling to be done
+int	mvs_pwd(char **chunk, t_list *env);
+int	mvs_env(char **chunk, t_list *env);
+int	mvs_export(char **chunk, t_list *env);
+int	mvs_unset(char **chunk, t_list *env);
 
 /* utils */
 size_t	ft_strlen(const char *str);
@@ -91,7 +91,7 @@ int		ft_isalnum(int c);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_print_error(char *cmd, char *arg, char *error);
-t_stat	ft_free_str(char *str);
+int	ft_free_str(char *str);
 void	dequote(char *str);
 char	**ft_split(char const *s, char c);
 

@@ -39,7 +39,7 @@ static bool	can_be_atoied(char *str)
 	return (false);
 }
 
-t_stat	mvs_exit(char **chunk, t_list *env)
+int	mvs_exit(char **chunk, t_list *env)
 {
 	int	i;
 
