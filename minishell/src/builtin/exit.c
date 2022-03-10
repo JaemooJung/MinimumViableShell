@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:34:14 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/07 16:04:14 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/08 19:01:58 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	mvs_exit(char **chunk, t_list *env)
 		ft_putstr_fd("exit\nminishell: exit: too many arguments", 2);
 		return (FAILURE);
 	}
-	dequote(chunk[1]); // will be performed while parsing, so have to be deleted
+	dequote(chunk[1]); //TODO: will be performed while parsing, so have to be deleted
 	if (can_be_atoied(chunk[1]) == false)
 	{
 		ft_putstr_fd("exit\nminishell: exit: abc: numeric argument required", 2);

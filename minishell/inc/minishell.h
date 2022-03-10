@@ -100,6 +100,7 @@ t_list	*ft_lstnew(char *line);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*copy_list(t_list *src);
 t_list	*sort_list(t_list *lst, int (*cmp)(const char *, const char *, size_t));
+void	ft_printlist(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	delete_node(t_list *lst);
 void	*ft_free_lst(t_list *lst);

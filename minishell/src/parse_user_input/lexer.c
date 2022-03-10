@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:34:02 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/06 22:55:04 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/08 18:51:10 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,17 @@ int	lexer(char **splitted, t_token **tokens)
 {
 	int	i;
 
+	*tokens = NULL;
 	*tokens = (t_token *)malloc(sizeof(t_token)
 			* (get_vector_size(splitted) + 1));
 	if (!(*tokens))
-		return (MALLOC_ERROR);
+		return (MALLOC_ERR);
 	i = 0;
 	while (splitted[i] != NULL)
 	{
 		(*tokens)[i].type = get_token_type(splitted[i]);
-		(*tokens)[i].value = splitted[i];
-		++i;
+		(*tokens)[i].value = ft_strdup(splitted[i]);
+		i++;
 	}
 	(*tokens)[i].type = T_NULL;
 	(*tokens)[i].value = NULL;

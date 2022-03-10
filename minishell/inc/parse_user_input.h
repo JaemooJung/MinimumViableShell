@@ -21,6 +21,8 @@
 
 typedef struct s_ast_node	t_ast_node;
 
+typedef struct s_list	t_list;
+
 typedef struct s_token
 {
 	int			type;
@@ -48,11 +50,14 @@ void		print_parsed(t_ast_node *tree);
 t_ast_node	*make_ast_node(int node_type, char *content);
 t_ast_node	*ast_insert(t_ast_node *root, t_token *token, int side);
 t_ast_node	*ast_insert_node(t_ast_node *root, t_ast_node *node, int side);
+void		clear_ast(t_ast_node *root);
 
 int			lexer(char **splitted, t_token **tokens);
 int			parse_pipeline(t_ast_node **root, t_token **tokens);
 int			parser(t_token **tokens, t_ast_node **tree);
 
-int			parse_user_input(const char *input, t_ast_node **tree);
+int			expand_env(t_ast_node **tree, t_list *our_env);
+
+int			parse_user_input(const char *input, t_ast_node **tree, t_list *our_env);
 
 #endif
