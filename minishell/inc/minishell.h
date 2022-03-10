@@ -38,6 +38,13 @@ typedef enum e_open
 	APPEND
 }	t_open;
 
+typedef enum e_status
+{
+	SUCCESS,
+	FAILURE,
+	MALLOC_ERR
+}	t_stat;
+
 typedef struct s_list
 {
 	struct s_list	*next;
@@ -45,12 +52,17 @@ typedef struct s_list
 	char			*line;
 }	t_list;
 
-typedef enum e_status
+typedef struct s_necessities
 {
-	SUCCESS,
-	FAILURE,
-	MALLOC_ERR
-}	t_stat;
+	int		exit_status;
+	int		pipe[2];
+	int 	fd[2];
+	int 	prev_dir;
+	bool	pipeexists;
+	char	*remainder;
+	char	*fullpath;
+	t_list	*env;
+}	t_info;
 
 /* envp friends */
 t_list	*envp_to_ours(char **envp);
@@ -79,7 +91,7 @@ int		ft_isalnum(int c);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_print_error(char *cmd, char *arg, char *error);
-void	*ft_free_str(char *str);
+t_stat	ft_free_str(char *str);
 void	dequote(char *str);
 char	**ft_split(char const *s, char c);
 

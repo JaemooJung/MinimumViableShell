@@ -30,11 +30,11 @@ int	ft_isalpha(int c)
 	return (0);
 }
 
-void	*ft_free_str(char *str)
+t_stat	ft_free_str(char *str)
 {
 	free(str);
 	str = NULL;
-	return (NULL);
+	return (MALLOC_ERR);
 }
 
 void	ft_print_error(char *cmd, char *arg, char *error)
