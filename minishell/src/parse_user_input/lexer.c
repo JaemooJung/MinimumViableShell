@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:34:02 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/08 18:51:10 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/11 13:47:21 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,26 @@ static int	get_token_type(char *token)
 *	description : 
 *	return		: 0 if success, 1 if fail
 */
-int	lexer(char **splitted, t_token **tokens)
+int	lexer(t_list *splitted, t_token **tokens)
 {
-	int	i;
+	int		i;
+	t_list	*tmp;
 
 	*tokens = NULL;
 	*tokens = (t_token *)malloc(sizeof(t_token)
-			* (get_vector_size(splitted) + 1));
+			* (ft_lstsize(splitted) + 1));
 	if (!(*tokens))
 		return (MALLOC_ERR);
 	i = 0;
-	while (splitted[i] != NULL)
+	tmp = splitted;
+	while (tmp != NULL)
 	{
-		(*tokens)[i].type = get_token_type(splitted[i]);
-		(*tokens)[i].value = ft_strdup(splitted[i]);
-		i++;
+		(*tokens)[i].type = get_token_type(tmp->line);
+		(*tokens)[i].value = ft_strdup(tmp->line);
+		tmp = tmp->next;
+		++i;
 	}
-	(*tokens)[i].type = T_NULL;
 	(*tokens)[i].value = NULL;
+	(*tokens)[i].type = T_NULL;
 	return (0);
 }
