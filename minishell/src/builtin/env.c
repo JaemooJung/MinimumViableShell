@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_stat	mvs_env(char **chunk, t_list *env)
+int	mvs_env(char **chunk, t_list *env)
 {
 	(void)chunk;
 	while (env != NULL)

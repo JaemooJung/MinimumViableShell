@@ -38,13 +38,6 @@ typedef enum e_open
 	APPEND
 }	t_open;
 
-typedef struct s_list
-{
-	struct s_list	*next;
-	struct s_list	*prev;
-	char			*line;
-}	t_list;
-
 typedef enum e_status
 {
 	SUCCESS,
@@ -52,19 +45,38 @@ typedef enum e_status
 	MALLOC_ERR
 }	t_stat;
 
+typedef struct s_list
+{
+	struct s_list	*next;
+	struct s_list	*prev;
+	char			*line;
+}	t_list;
+
+typedef struct s_necessities
+{
+	int		exit_status;
+	int		pipe[2];
+	int 	fd[2];
+	int 	prev_dir;
+	bool	pipeexists;
+	char	*remainder;
+	char	*fullpath;
+	t_list	*env;
+}	t_info;
+
 /* envp friends */
 t_list	*envp_to_ours(char **envp);
 char	*get_value(t_list *env, char *key);
-t_stat	append_to_env(t_list *env, char *str);
+int	append_to_env(t_list *env, char *str);
 char	**to_vector(t_list *env);
 /* builtins */
-t_stat	mvs_echo(char **chunk, t_list *env);
-t_stat	mvs_exit(char **chunk, t_list *env); // is whitespace func necessary? + dequote have to be removed after parsing done
-t_stat	mvs_cd(char **chunk, t_list *env); // error handling to be done
-t_stat	mvs_pwd(char **chunk, t_list *env);
-t_stat	mvs_env(char **chunk, t_list *env);
-t_stat	mvs_export(char **chunk, t_list *env);
-t_stat	mvs_unset(char **chunk, t_list *env);
+int	mvs_echo(char **chunk, t_list *env);
+int	mvs_exit(char **chunk, t_list *env); // is whitespace func necessary? + dequote have to be removed after parsing done
+int	mvs_cd(char **chunk, t_list *env); // error handling to be done
+int	mvs_pwd(char **chunk, t_list *env);
+int	mvs_env(char **chunk, t_list *env);
+int	mvs_export(char **chunk, t_list *env);
+int	mvs_unset(char **chunk, t_list *env);
 
 /* utils */
 size_t	ft_strlen(const char *str);

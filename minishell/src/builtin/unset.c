@@ -35,7 +35,7 @@ static void	find_n_remove(t_list *env, char *str)
 	}
 }
 
-t_stat	mvs_unset(char **chunk, t_list *env)
+int	mvs_unset(char **chunk, t_list *env)
 {
 	int	index;
 	int	exit_status;

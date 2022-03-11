@@ -36,7 +36,7 @@ static bool	is_valid_opt(const char *arg, bool *nlflag, bool *optflag)
 }
 
 /* input should include the command, 'echo' */
-t_stat	mvs_echo(char **chunk, t_list *env)
+int	mvs_echo(char **chunk, t_list *env)
 {
 	bool	nlflag;
 	bool	optflag;

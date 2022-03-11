@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static t_stat	chdir_to_home(t_list *env)
+static int	chdir_to_home(t_list *env)
 {
 	char	*homepath;
 	int		status;
@@ -27,7 +27,7 @@ static t_stat	chdir_to_home(t_list *env)
 	return (SUCCESS);
 }
 
-static t_stat	chdir_to_arg(char *path)
+static int	chdir_to_arg(char *path)
 {
 	int		status;
 
@@ -40,36 +40,36 @@ static t_stat	chdir_to_arg(char *path)
 	return (SUCCESS);
 }
 
-static t_stat	manage_pwds(char *pwd, t_list *env)
+static int	manage_pwds(char *pwd, t_list *env)
 {
 	char	*temp;
 
 	temp = ft_strjoin("OLDPWD=", pwd);
 	if (temp == NULL)
-		return (MALLOC_ERR);
+		return (FAILURE);
 	append_to_env(env, temp);
 	ft_free_str(pwd);
 	ft_free_str(temp);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		return (MALLOC_ERR);
+		return (FAILURE);
 	temp = ft_strjoin("PWD=", pwd);
 	if (temp == NULL)
-		return (MALLOC_ERR);
+		return (FAILURE);
 	append_to_env(env, temp);
 	ft_free_str(temp);
 	return (SUCCESS);
 }
 
-t_stat	mvs_cd(char **chunk, t_list *env)
+int	mvs_cd(char **chunk, t_list *env)
 {
-	t_stat	exit_status;
+	int	exit_status;
 	char	*pwd;
 	char	*temp;
 
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		return (MALLOC_ERR);
+		return (FAILURE);
 	if (chunk[1] == NULL)
 		exit_status = chdir_to_home(env);
 	else

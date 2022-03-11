@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_stat	mvs_pwd(char **chunk, t_list *env)
+int	mvs_pwd(char **chunk, t_list *env)
 {
 	char	*current_dir;
 

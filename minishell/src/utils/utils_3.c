@@ -30,14 +30,14 @@ int	ft_isalpha(int c)
 	return (0);
 }
 
-void	*ft_free_str(char *str)
+int	ft_free_str(char *str)
 {
 	free(str);
 	str = NULL;
-	return (NULL);
+	return (FAILURE);
 }
 
-void	ft_print_error(char *cmd, char *arg, char *error)
+int	ft_print_error(char *cmd, char *arg, char *error)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
@@ -48,4 +48,16 @@ void	ft_print_error(char *cmd, char *arg, char *error)
 		ft_putstr_fd(": ", STDERR_FILENO);
 	}
 	ft_putendl_fd(error, STDERR_FILENO);
+	return (FAILURE);
+}
+
+void	ft_free_vector(char **vector)
+{
+	int	index;
+
+	index = 0;
+	while (vector[index] != NULL)
+		ft_free_str(vector[index++]);
+	free(vector);
+	vector = NULL;
 }

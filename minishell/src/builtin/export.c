@@ -49,14 +49,14 @@ static int	ft_strncmp_for_sort(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-static t_stat	print_sorted(t_list *env)
+static int	print_sorted(t_list *env)
 {
 	t_list	*temp;
 	t_list	*cur;
 
 	temp = copy_list(env);
 	if (temp == NULL)
-		return (MALLOC_ERR);
+		return (FAILURE);
 	sort_list(temp, ft_strncmp_for_sort);
 	cur = temp;
 	while (cur != NULL)
@@ -75,10 +75,10 @@ static t_stat	print_sorted(t_list *env)
 //	‘=‘이 있을 때	키가 없으면 더해주고 이미 키가 존재하면 대체해준다.
 //	‘=‘이 없을 때	키가 없으면 더해주고 이미 키가 존재하면 패스
 
-t_stat	mvs_export(char **chunk, t_list *env)
+int	mvs_export(char **chunk, t_list *env)
 {
 	int		index;
-	t_stat	exit_status;
+	int		exit_status;
 
 	index = 0;
 	exit_status = SUCCESS;

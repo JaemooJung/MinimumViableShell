@@ -38,25 +38,25 @@ static size_t	find_equal_or_end(char *str)
 	return (index);
 }
 
-static t_stat	add_new_env(t_list *env, char *str)
+static int	add_new_env(t_list *env, char *str)
 {
 	char	*new;
 	t_list	*temp;
 
 	new = ft_strdup(str);
 	if (new == NULL)
-		return (MALLOC_ERR);
+		return (FAILURE);
 	temp = ft_lstnew(new);
 	if (temp == NULL)
 	{
 		ft_free_str(new);
-		return (MALLOC_ERR);
+		return (FAILURE);
 	}
 	ft_lstadd_back(&env, temp);
 	return (SUCCESS);
 }
 
-static t_stat	find_n_append(t_list *env, char *str)
+static int	find_n_append(t_list *env, char *str)
 {
 	size_t	len;
 	t_list	*origin;
@@ -73,7 +73,7 @@ static t_stat	find_n_append(t_list *env, char *str)
 			{
 				new = ft_strdup(str);
 				if (new == NULL)
-					return (MALLOC_ERR);
+					return (FAILURE);
 				ft_free_str(env->line);
 				env->line = new;
 			}
@@ -84,7 +84,7 @@ static t_stat	find_n_append(t_list *env, char *str)
 	return (add_new_env(origin, str));
 }
 
-t_stat	append_to_env(t_list *env, char *str)
+int	append_to_env(t_list *env, char *str)
 {
 	if (is_valid_identifier(str) == false)
 	{
