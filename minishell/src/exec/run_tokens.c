@@ -2,21 +2,21 @@
 
 void	execute_tree(t_ast_node *node, t_info *info)
 {
-//	if (info->exit_status == FAILURE)
+//	if (info->exit_status != SUCCESS)
 //		ft_print_error(NULL, NULL, strerror(errno));
 	if (node->node_type == NODE_PIPE && node->right != NULL)
 		info->exit_status = lets_pipe(info);
-	else if (node->node_type == NODE_REDIR_TYPE)
+	else if (info->exit_status == SUCCESS && node->node_type == NODE_REDIR_TYPE)
 		info->exit_status = teach_me_direction(node->content, info);
-	else if (node->node_type == NODE_FILE_NAME)
+	else if (info->exit_status == SUCCESS && node->node_type == NODE_FILE_NAME)
 		info->exit_status = redir_n_join_remainder(node->content, info);
-	else if (node->node_type == NODE_FILE_PATH)
+	else if (info->exit_status == SUCCESS && node->node_type == NODE_FILE_PATH)
 		info->exit_status = get_fullpath(node->content, info);
-	else if (node->node_type == NODE_ARGV)
+	else if (info->exit_status == SUCCESS && node->node_type == NODE_ARGV)
 		info->exit_status = builtin_or_not(node->content, info);
 }
 
-void search_tree(t_ast_node *node, t_info *info)
+void	search_tree(t_ast_node *node, t_info *info)
 {
 	execute_tree(node, info);
 	if (node->left != NULL)
