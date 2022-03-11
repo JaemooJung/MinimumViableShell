@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/06 21:36:35 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/06 21:36:37 by hakim            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -70,11 +59,14 @@ void	*ft_free_lst(t_list *lst)
 {
 	t_list	*temp;
 
+	if (!lst) 
+	return (NULL);
 	while (lst->next != NULL)
 	{
 		temp = lst->next;
 		delete_node(lst);
 		lst = temp;
 	}
+	delete_node(lst);
 	return (NULL);
 }

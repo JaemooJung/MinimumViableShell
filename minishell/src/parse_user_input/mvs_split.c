@@ -97,13 +97,13 @@ char	**mvs_split(char const *s)
 	char	**words;
 	int		size;
 
-	if (s == 0)
-		return (0);
+	if (s == NULL)
+		return (NULL);
 	size = wordcount(s, 0);
-	words = malloc(sizeof(char *) * size + 1);
-	if (words == 0)
-		return (0);
-	words[size] = 0;
+	words = malloc(sizeof(char *) * (size + 1));
+	if (words == NULL)
+		return (NULL);
+	words[size] = NULL;
 	do_split(s, words, size);
 	return (words);
 }

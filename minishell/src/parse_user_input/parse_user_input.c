@@ -31,18 +31,23 @@ static void	free_vector(char **vector)
 
 int	parse_user_input(const char *input, t_ast_node **tree, t_list *our_env)
 {
-	char	**splitted;
+	t_list	*splitted;
 	t_token	*tokens;
 	t_token	*tmp;
 
-	splitted = mvs_split(input);
-	debug_print_vector(splitted);
+	splitted = NULL;
+	if (split_input(input, &splitted))
+	{
+		printf("minishell: unclosed quote\n");
+		ft_free_lst(splitted);
+		return (UNCLOSED_QUOTE);
+	}
 	lexer(splitted, &tokens);
 	tmp = tokens;
 	debug_print_tokens(tmp);
 	parser(&tmp, tree);
 	expand_env(tree, our_env);
 	free_tokens(tokens);
-	free_vector(splitted);
+	ft_free_lst(splitted);
 	return (0);
 }

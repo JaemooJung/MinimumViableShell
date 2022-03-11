@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:45:39 by hakim             #+#    #+#             */
-/*   Updated: 2021/11/11 22:38:41 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/11 13:55:07 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,21 @@ static int	get_si(int *i, char const *s, char c)
 	return (size);
 }
 
-/*
-void	ft_free_split(char **big, int bigdex)
-{
-	int	index;
 
-	index = bigdex - 1;
-	while (index >= 0)
-	{
-		free(big[index]);
-		big[index] = 0;
-		--index;
-	}
-	free(big);
-	big = 0;
-}
-*/
+// void	ft_free_split(char **big, int bigdex)
+// {
+// 	int	index;
+
+// 	index = bigdex - 1;
+// 	while (index >= 0)
+// 	{
+// 		free(big[index]);
+// 		big[index] = 0;
+// 		--index;
+// 	}
+// 	free(big);
+// 	big = 0;
+// }
 
 static void	go_split(char **big, char const *s, char c, int bigdex)
 {
