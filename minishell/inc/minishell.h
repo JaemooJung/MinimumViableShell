@@ -79,6 +79,7 @@ int		ft_isalnum(int c);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_print_error(char *cmd, char *arg, char *error);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_free_str(char *str);
 void	dequote(char *str);
 char	**ft_split(char const *s, char c);

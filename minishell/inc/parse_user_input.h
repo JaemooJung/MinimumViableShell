@@ -19,6 +19,8 @@
 # define LEFT 0
 # define RIGHT 1
 
+# define UNCLOSED_QUOTE 44
+
 typedef struct s_ast_node	t_ast_node;
 
 typedef struct s_list	t_list;
@@ -39,8 +41,9 @@ typedef struct s_ast_node
 
 bool		m_is_space(char c);
 bool		m_is_quote(char c);
-void		ft_free_split(char **splitted, int index);
+int			split_input(char const *input, t_list **splited);
 char		**mvs_split(char const *s);
+void		ft_free_split(char **splitted, int index);
 char		*j_strdup(const char *s1);
 char		*j_strjoin(char const *s1, char const *s2);
 char		*conv_str_join(char *argv, char *new_str);
@@ -52,7 +55,7 @@ t_ast_node	*ast_insert(t_ast_node *root, t_token *token, int side);
 t_ast_node	*ast_insert_node(t_ast_node *root, t_ast_node *node, int side);
 void		clear_ast(t_ast_node *root);
 
-int			lexer(char **splitted, t_token **tokens);
+int			lexer(t_list *splitted, t_token **tokens);
 int			parse_pipeline(t_ast_node **root, t_token **tokens);
 int			parser(t_token **tokens, t_ast_node **tree);
 
