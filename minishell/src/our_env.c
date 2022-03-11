@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+static void	*env_free_str(char *str)
+{
+	free(str);
+	str = NULL;
+	return (NULL);
+}
+
 t_list	*envp_to_ours(char **envp)
 {
 	t_list	*head;
@@ -25,7 +32,7 @@ t_list	*envp_to_ours(char **envp)
 		return (NULL);
 	head = ft_lstnew(line);
 	if (head == NULL)
-		return (ft_free_str(line));
+		return (env_free_str(line));
 	cur = head;
 	while (envp[index] != NULL)
 	{
@@ -85,19 +92,3 @@ void	ft_printlist(t_list *lst)
 		lst = lst->next;
 	}
 }
-
-/*int main(int ac, char **av, char **envp)
-{
-	t_list *our_env;
-	char **hihi;
-
-	our_env = envp_to_ours(envp);
-	printf("%s\n", our_env);
-//	our_env = ft_lstnew("aa");
-//	ft_lstadd_back(&our_env, ft_lstnew("bb"));
-//	ft_lstadd_back(&our_env, ft_lstnew("cc"));
-//	ft_lstadd_back(&our_env, ft_lstnew("dd"));
-//	ft_lstadd_back(&our_env, ft_lstnew("ee"));
-//	ft_printlist(our_env);
-//	ft_printlist(our_env);
-}*/

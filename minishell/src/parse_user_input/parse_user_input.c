@@ -36,10 +36,10 @@ int	parse_user_input(const char *input, t_ast_node **tree, t_list *our_env)
 	t_token	*tmp;
 
 	splitted = mvs_split(input);
-	debug_print_vector(splitted);
+//	debug_print_vector(splitted);
 	lexer(splitted, &tokens);
 	tmp = tokens;
-	debug_print_tokens(tmp);
+//	debug_print_tokens(tmp);
 	parser(&tmp, tree);
 	expand_env(tree, our_env);
 	free_tokens(tokens);
