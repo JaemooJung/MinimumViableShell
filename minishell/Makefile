@@ -2,8 +2,8 @@ NAME 		=	minishell
 
 CC 			=	gcc
 CFLAGS		=	-g
-READLINE	=	-L/usr/local/opt/readline/lib -lreadline -I/usr/local/opt/readline/include
-#READLINE	=	-L/opt/homebrew/opt/readline/lib -lreadline -I/opt/homebrew/opt/readline/include
+#READLINE	=	-L/usr/local/opt/readline/lib -lreadline -I/usr/local/opt/readline/include
+READLINE	=	-L/opt/homebrew/opt/readline/lib -lreadline -I/opt/homebrew/opt/readline/include
 RM			=	rm -f
 
 FILES 		=	main.c \
@@ -32,8 +32,13 @@ FILES 		=	main.c \
 				utils/utils_2.c \
 				utils/utils_3.c \
 				our_env.c \
+				exec/run_tokens.c \
+                exec/redir.c \
+                exec/redir_utils.c \
+                exec/execute.c \
+                exec/pipe_n_dup.c \
+                exec/path.c \
 				debug/debug_print.c \
-				exec/redirection.c \
 
 SRC_DIR		=	./src/
 INC_DIR		=	./inc

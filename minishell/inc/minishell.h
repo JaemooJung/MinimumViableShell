@@ -59,6 +59,7 @@ typedef struct s_necessities
 	int 	fd[2];
 	int 	prev_dir;
 	bool	pipeexists;
+	char	*binary;
 	char	*remainder;
 	char	*fullpath;
 	t_list	*env;
@@ -67,16 +68,16 @@ typedef struct s_necessities
 /* envp friends */
 t_list	*envp_to_ours(char **envp);
 char	*get_value(t_list *env, char *key);
-int	append_to_env(t_list *env, char *str);
+int		append_to_env(t_list *env, char *str);
 char	**to_vector(t_list *env);
 /* builtins */
-int	mvs_echo(char **chunk, t_list *env);
-int	mvs_exit(char **chunk, t_list *env); // is whitespace func necessary? + dequote have to be removed after parsing done
-int	mvs_cd(char **chunk, t_list *env); // error handling to be done
-int	mvs_pwd(char **chunk, t_list *env);
-int	mvs_env(char **chunk, t_list *env);
-int	mvs_export(char **chunk, t_list *env);
-int	mvs_unset(char **chunk, t_list *env);
+int		mvs_echo(char **chunk, t_list *env);
+int		mvs_exit(char **chunk, t_list *env); // is whitespace func necessary? + dequote have to be removed after parsing done
+int		mvs_cd(char **chunk, t_list *env); // error handling to be done
+int		mvs_pwd(char **chunk, t_list *env);
+int		mvs_env(char **chunk, t_list *env);
+int		mvs_export(char **chunk, t_list *env);
+int		mvs_unset(char **chunk, t_list *env);
 
 /* utils */
 size_t	ft_strlen(const char *str);
@@ -90,8 +91,9 @@ int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_print_error(char *cmd, char *arg, char *error);
-int	ft_free_str(char *str);
+int		ft_print_error(char *cmd, char *arg, char *error);
+int		ft_free_str(char *str);
+void	ft_free_vector(char **vector);
 void	dequote(char *str);
 char	**ft_split(char const *s, char c);
 
@@ -106,6 +108,17 @@ void	delete_node(t_list *lst);
 void	*ft_free_lst(t_list *lst);
 size_t	ft_lstsize(t_list *lst);
 
+/* exec */
+int		keep_stdio(int *origin);
+int		restore_stdio(int *origin);
+int		lets_pipe(t_info *info);
+int		here_doc(int infile, char *limiter);
+int		builtin_or_not(char *content, t_info *info);
+int		mvs_open(char *file, int mode);
+int		here_doc(int infile, char *limiter);
+int		teach_me_direction(char *content, t_info *info);
+int		redir_n_join_remainder(char *content, t_info *info);
+int		get_fullpath(char *content, t_info *info);
 /* ?????? */
 void run_tokens(t_ast_node *node, t_list *env);
 
