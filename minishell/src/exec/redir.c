@@ -23,10 +23,12 @@ static int	join_remainder(char *content, t_info *info)
 	space_loc = 0;
 	while (content[space_loc] != ' ')
 		++space_loc;
-	temp = info->remainder;
-	info->remainder = ft_strjoin(info->remainder, &content[space_loc + 1]);
-	if (temp != NULL)
-		return (ft_free_str(temp));
+	temp = ft_strjoin(info->remainder, &content[space_loc]);
+	if (temp == NULL)
+		return (FAILURE);
+	if (info->remainder != NULL)
+		ft_free_str(info->remainder);
+	info->remainder = temp;
 	content[space_loc] = '\0';
 	return (SUCCESS);
 }
