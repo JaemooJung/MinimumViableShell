@@ -23,6 +23,25 @@ void	search_tree(t_ast_node *node, t_info *info)
 		search_tree(node->right, info);
 }
 
+static void	init_info(t_info *info)
+{
+	info->exit_status = SUCCESS;
+	info->pipeexists = false;
+	info->remainder = NULL;
+	info->fd[0] = -1;
+	info->fd[1] = -1;
+}
+
+static void	clear_info(t_info *info)
+{
+	if (info->remainder != NULL)
+		ft_free_str(info->remainder);
+	if (info->fd[0] != -1)
+		close(info->fd[0]);
+	if (info->fd[1] != -1)
+		close(info->fd[1]);
+}
+
 void	run_tokens(t_ast_node *node, t_list *env, int *exit_status)
 {
 	int		origin[2];
@@ -30,9 +49,7 @@ void	run_tokens(t_ast_node *node, t_list *env, int *exit_status)
 	int		heredoc;
 
 	info.env = env;
-	info.exit_status = SUCCESS;
-	info.pipeexists = false;
-	info.remainder = NULL;
+	init_info(&info);
 	if (keep_stdio(origin) == FAILURE)
 		ft_print_error(NULL, NULL, strerror(errno));
 	search_tree(node, &info);
@@ -46,6 +63,7 @@ void	run_tokens(t_ast_node *node, t_list *env, int *exit_status)
 			ft_print_error(NULL, NULL, strerror(errno));
 	}
 	*exit_status = info.exit_status;
-	if (info.remainder != NULL)
-		ft_free_str(info.remainder);
+	clear_info(&info);
+	close(origin[0]);
+	close(origin[1]);
 }

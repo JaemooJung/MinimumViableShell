@@ -21,12 +21,13 @@ static int	do_parent_proc(pid_t pid, t_info *info)
 
 	if (info->pipeexists)
 	{
+		info->pipeexists = false;
 		close(info->pipe[1]);
 		if (dup2(info->pipe[0], STDIN_FILENO) == -1)
 			return (FAILURE);
-		close(info->pipe[0]);
 	}
 	waitpid(pid, &status, 0);
+	close(info->pipe[0]);
 	info->exit_status = WEXITSTATUS(status);
 	return (SUCCESS);
 }
