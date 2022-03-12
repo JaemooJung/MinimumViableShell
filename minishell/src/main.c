@@ -2,6 +2,7 @@
 
 void	minimum_viable_shell(t_list *env)
 {
+	static int	exit_status = 0;
 	char		*cmdline;
 	t_ast_node	*tree;
 
@@ -17,8 +18,8 @@ void	minimum_viable_shell(t_list *env)
 		ft_free_str(cmdline);
 		return ;
 	}
-	print_parsed(tree);
-	//run_tokens(tree, env);
+//	print_parsed(tree);
+	run_tokens(tree, env, &exit_status);
 	clear_ast(tree);
 	ft_free_str(cmdline);
 }
