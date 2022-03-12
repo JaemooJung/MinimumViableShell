@@ -63,7 +63,7 @@ static int	manage_pwds(char *pwd, t_list *env)
 
 int	mvs_cd(char **chunk, t_list *env)
 {
-	int	exit_status;
+	int		exit_status;
 	char	*pwd;
 	char	*temp;
 
@@ -79,40 +79,3 @@ int	mvs_cd(char **chunk, t_list *env)
 	ft_free_str(pwd);
 	return (exit_status);
 }
-
-/*
-int main(int ac, char **av, char **envp)
-{
-	t_list	*env = envp_to_ours(envp);
-	char	*chunk[3];
-	char	*chunk2[3];
-	char *prevDir = getcwd(NULL, 0);
-	if (prevDir == NULL)
-	{
-		strerror(errno);
-		return (FAILURE);
-	}
-	printf("%s\n", prevDir);
-	free(prevDir);
-	prevDir = NULL;
-	chunk2[0] = "unset";
-	chunk2[1] = "HOME";
-	chunk2[2] = NULL;
-	mvs_env(chunk, env);
-	mvs_unset(chunk2, env);
-	chunk[0] = "export";
-	chunk[1] = NULL;
-	chunk[2] = NULL;
-	mvs_cd(chunk, env);
-	char *currentDir = getcwd(NULL, 0);
-	if (currentDir == NULL)
-	{
-		strerror(errno);
-		return (FAILURE);
-	}
-	printf("%s\n", currentDir);
-	free(currentDir);
-	currentDir = NULL;
-	mvs_export(chunk, env);
-//	return (0);
-}*/

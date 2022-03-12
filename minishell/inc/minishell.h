@@ -38,6 +38,18 @@ typedef enum e_open
 	APPEND
 }	t_open;
 
+typedef enum e_builtins
+{
+	CD,
+	ECHO,
+	ENV,
+	EXIT,
+	EXPORT,
+	PWD,
+	UNSET,
+	NONE
+}	t_builtins;
+
 typedef enum e_status
 {
 	SUCCESS,
@@ -59,7 +71,6 @@ typedef struct s_necessities
 	int 	fd[2];
 	int 	prev_dir;
 	bool	pipeexists;
-	char	*binary;
 	char	*remainder;
 	char	*fullpath;
 	t_list	*env;
@@ -78,6 +89,8 @@ int		mvs_pwd(char **chunk, t_list *env);
 int		mvs_env(char **chunk, t_list *env);
 int		mvs_export(char **chunk, t_list *env);
 int		mvs_unset(char **chunk, t_list *env);
+int		classify_builtin(char *str);
+void	builtins_init(int (*func[])(char **, t_list *));
 
 /* utils */
 size_t	ft_strlen(const char *str);
@@ -94,6 +107,7 @@ void	ft_putendl_fd(char *s, int fd);
 int		ft_print_error(char *cmd, char *arg, char *error);
 int		ft_free_str(char *str);
 void	ft_free_vector(char **vector);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	dequote(char *str);
 char	**ft_split(char const *s, char c);
 
@@ -115,11 +129,11 @@ int		lets_pipe(t_info *info);
 int		here_doc(int infile, char *limiter);
 int		builtin_or_not(char *content, t_info *info);
 int		mvs_open(char *file, int mode);
-int		here_doc(int infile, char *limiter);
 int		teach_me_direction(char *content, t_info *info);
 int		redir_n_join_remainder(char *content, t_info *info);
-int		get_fullpath(char *content, t_info *info);
+int		get_fullpath(char **content, t_info *info);
+
 /* ?????? */
-void run_tokens(t_ast_node *node, t_list *env);
+void run_tokens(t_ast_node *node, t_list *env, int *exit_status);
 
 #endif

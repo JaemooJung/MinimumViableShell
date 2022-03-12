@@ -35,7 +35,6 @@ static bool	is_valid_opt(const char *arg, bool *nlflag, bool *optflag)
 	return (false);
 }
 
-/* input should include the command, 'echo' */
 int	mvs_echo(char **chunk, t_list *env)
 {
 	bool	nlflag;
@@ -60,13 +59,3 @@ int	mvs_echo(char **chunk, t_list *env)
 		printf("\n");
 	return (SUCCESS);
 }
-
-/*
-int	main(void)
-{
-	char *str = "echo";// -n -nnnnnn 15345 -n 1345 -n -n -n-n-n 123123 585145";
-	char **splitted = mvs_split(str);
-	mvs_echo(splitted, NULL);
-	exit(13);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 22:13:45 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/06 19:52:32 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/11 13:49:45 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ void	debug_print_vector(char **vector)
 		++i;
 	}
 }
+
+// void	debug_print_splitted(t_list *splitted)
+// {
+// 	t_list	*tmp;
+
+// 	tmp = splitted;
+// 	while (tmp != NULL)
+// 	{
+// 		printf("%s\n", tmp->line);
+// 		tmp = tmp->next;
+// 	}
+// }
 
 void	debug_print_tokens(t_token *tokens)
 {

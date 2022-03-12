@@ -49,6 +49,23 @@ static int	ft_strncmp_for_sort(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
+static void	*ft_free_lst_wo_dup(t_list *lst)
+{
+	t_list	*temp;
+
+	if (!lst)
+		return (NULL);
+	while (lst->next != NULL)
+	{
+		temp = lst->next;
+		free(lst);
+		lst = temp;
+	}
+	free(lst);
+	lst = NULL;
+	return (NULL);
+}
+
 static int	print_sorted(t_list *env)
 {
 	t_list	*temp;
@@ -68,7 +85,7 @@ static int	print_sorted(t_list *env)
 			ft_putendl_fd(cur->line, STDOUT_FILENO);
 		cur = cur->next;
 	}
-	ft_free_lst(temp);
+	ft_free_lst_wo_dup(temp);
 	return (SUCCESS);
 }
 // 인자 검사하고 ->
@@ -98,24 +115,3 @@ int	mvs_export(char **chunk, t_list *env)
 	}
 	return (exit_status);
 }
-
-/*int main(int ac, char **av, char **envp)
-{
-	t_list	*env = envp_to_ours(envp);//ft_lstnew(NULL);//envp_to_ours(envp);
-	char	*chunk[8];
-	char	*chunk2[2];
-
-	chunk[0] = "export";
-	chunk[1] = "a";
-	chunk[2] = "a=123";
-	chunk[3] = "a";
-	chunk[4] = "a";
-	chunk[5] = "t=123";
-	chunk[6] = "a12";
-	chunk[7] = NULL;
-	mvs_export(chunk, env);
-	chunk2[0] = "export";
-	chunk2[1] = NULL;
-	mvs_export(chunk2, env);
-	return (0);
-}*/

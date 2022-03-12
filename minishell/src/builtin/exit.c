@@ -57,7 +57,6 @@ int	mvs_exit(char **chunk, t_list *env)
 		ft_putstr_fd("exit\nminishell: exit: too many arguments", 2);
 		return (FAILURE);
 	}
-	dequote(chunk[1]); //TODO: will be performed while parsing, so have to be deleted
 	if (can_be_atoied(chunk[1]) == false)
 	{
 		ft_putstr_fd("exit\nminishell: exit: abc: numeric argument required", 2);
@@ -66,14 +65,3 @@ int	mvs_exit(char **chunk, t_list *env)
 	ft_putstr_fd("exit\n", 1);
 	exit(ft_atoi(chunk[1]));
 }
-
-// int main(void)
-// {
-// 	char **chunk = mvs_split("exit \"world");
-// 	int index = 0;
-// 	while (chunk[index] != NULL)
-// 		printf("%s\n", chunk[index++]);
-// //	printf("%s\n", chunk[0]);
-// //	printf("%s\n", chunk[1]);
-// //	mvs_exit(chunk);
-// }

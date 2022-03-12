@@ -8,8 +8,9 @@ RM			=	rm -f
 
 FILES 		=	main.c \
 				parse_user_input/parse_user_input.c \
-				parse_user_input/mvs_split_utils.c \
+				parse_user_input/split_input.c \
 				parse_user_input/mvs_split.c \
+				parse_user_input/mvs_split_utils.c \
 				parse_user_input/lexer.c \
 				parse_user_input/parser.c \
 				parse_user_input/parser_funcs.c \
@@ -31,6 +32,7 @@ FILES 		=	main.c \
 				utils/utils_1.c \
 				utils/utils_2.c \
 				utils/utils_3.c \
+				utils/utils_4.c \
 				our_env.c \
 				exec/run_tokens.c \
                 exec/redir.c \

@@ -27,15 +27,3 @@ int	mvs_pwd(char **chunk, t_list *env)
 	ft_free_str(current_dir);
 	return (SUCCESS);
 }
-
-/*
-int main(void)
-{
-	char *chunk[2];
-
-	chunk[0] = "pwd";
-	chunk[1] = 0;
-	mvs_pwd(chunk);
-	system("leaks pwd");
-}
-*/
