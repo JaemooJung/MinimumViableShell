@@ -40,20 +40,20 @@ static int	chdir_to_arg(char *path)
 	return (SUCCESS);
 }
 
-static int	manage_pwds(char *pwd, t_list *env)
+static int	manage_pwds(char **pwd, t_list *env)
 {
 	char	*temp;
 
-	temp = ft_strjoin("OLDPWD=", pwd);
+	temp = ft_strjoin("OLDPWD=", *pwd);
 	if (temp == NULL)
 		return (FAILURE);
 	append_to_env(env, temp);
-	ft_free_str(pwd);
+	ft_free_str(*pwd);
 	ft_free_str(temp);
-	pwd = getcwd(NULL, 0);
-	if (pwd == NULL)
+	*pwd = getcwd(NULL, 0);
+	if (*pwd == NULL)
 		return (FAILURE);
-	temp = ft_strjoin("PWD=", pwd);
+	temp = ft_strjoin("PWD=", *pwd);
 	if (temp == NULL)
 		return (FAILURE);
 	append_to_env(env, temp);
@@ -75,7 +75,7 @@ int	mvs_cd(char **chunk, t_list *env)
 	else
 		exit_status = chdir_to_arg(chunk[1]);
 	if (exit_status == SUCCESS)
-		exit_status = manage_pwds(pwd, env);
+		exit_status = manage_pwds(&pwd, env);
 	ft_free_str(pwd);
 	return (exit_status);
 }
