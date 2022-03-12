@@ -26,6 +26,7 @@ FILES 		=	main.c \
 				builtin/export.c \
 				builtin/pwd.c \
 				builtin/unset.c \
+				builtin/builtin_utils.c \
 				utils/ft_split.c \
 				utils/list_1.c \
 				utils/list_2.c \
