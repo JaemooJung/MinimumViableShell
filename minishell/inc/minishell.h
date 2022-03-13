@@ -18,8 +18,6 @@
 # define SQUOTE '\''
 # define DQUOTE '\"'
 
-# define MALLOC_ERROR 1
-
 # define INFILE 0
 # define OUTFILE 1
 

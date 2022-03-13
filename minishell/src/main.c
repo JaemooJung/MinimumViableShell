@@ -4,6 +4,7 @@ void	minimum_viable_shell(t_list *env)
 {
 	char		*cmdline;
 	t_ast_node	*tree;
+	int			err_code;
 
 	tree = NULL;
 	cmdline = readline("\033[1;32mminishell $ \033[0m");
@@ -11,8 +12,11 @@ void	minimum_viable_shell(t_list *env)
 		return ;
 	if (cmdline[0] != '\0')
 		add_history(cmdline);
-	if (parse_user_input(cmdline, &tree, env))
+	err_code = parse_user_input(cmdline, &tree, env);
+	if (err_code)
 	{
+		if (err_code == UNCLOSED_QUOTE)
+			printf("ERROR: Unclosed quote\n");
 		clear_ast(tree);
 		ft_free_str(cmdline);
 		return ;

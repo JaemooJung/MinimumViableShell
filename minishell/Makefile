@@ -17,6 +17,7 @@ FILES 		=	main.c \
 				parse_user_input/parser_utils.c \
 				parse_user_input/parser_utils_2.c \
 				parse_user_input/tree_utils.c \
+				parse_user_input/compare_and_join_env.c \
 				parse_user_input/expand_env.c \
 				builtin/cd.c \
 				builtin/echo.c \
