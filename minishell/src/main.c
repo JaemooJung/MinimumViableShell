@@ -8,8 +8,14 @@ void	minimum_viable_shell(t_list *env)
 
 	tree = NULL;
 	cmdline = readline("\033[1;32mminishell $ \033[0m");
+	//ctrl+d가 들어왓을 때 readline 값은 NULL이 된다..
 	if (cmdline == NULL)
-		return ;
+	{
+		printf("\033[1A"); // 커서를 위로 한 줄 올린다.
+		printf("\033[10C"); // 커서를 10만큼 앞으로 전진시킨다.
+		printf("exit\n");
+		exit(0);
+	}
 	if (cmdline[0] != '\0')
 		add_history(cmdline);
 	err_code = parse_user_input(cmdline, &tree, env);
@@ -29,11 +35,17 @@ void	minimum_viable_shell(t_list *env)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_list	*our_env;
-
+	t_list			*our_env;
+	struct termios	term;
+	
 	printf("Hello, world!\n");
 	printf("hello, minishell!\n");
-//	setup_signals();
+	//현재 터미널의 속성을 읽어와서 term 구조체에 저장
+	tcgetattr(STDIN_FILENO, &term);
+	//터미널의 속성을 설정
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	signal_handler_init();
 	our_env = envp_to_ours(envp);
 	while (1)
 	{
