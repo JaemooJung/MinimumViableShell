@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	open_for_check(char *path)
+static int	open_for_check(char *path)
 {
 	int	fd;
 
@@ -12,52 +12,69 @@ int	open_for_check(char *path)
 		return (FAILURE);
 }
 
-int	concat_path(char **cmd, t_list *env, int i)
+static char	*make_path(char *cmd, char *path)
+{
+	char	*temp;
+
+	temp = ft_strjoin("/", cmd);
+	if (temp == NULL)
+		return (NULL);
+	path = ft_strjoin(path, temp);
+	if (path == NULL)
+	{
+		ft_free_str(temp);
+		return (NULL);
+	}
+	ft_free_str(temp);
+	return (path);
+}
+
+static int	concat_path(char **cmd, t_list *env, int i)
 {
 	char	**paths;
 	char	*path;
-	char	*temp;
 
 	paths = ft_split(get_value(env, "PATH") + 5, ':');
 	if (paths == NULL)
 		return (FAILURE);
 	while (paths[i] != NULL)
 	{
-		temp = ft_strjoin("/", *cmd);
-		if (temp == NULL)
-			return (FAILURE);
-		path = ft_strjoin(paths[i++], temp);
+		path = make_path(*cmd, paths[i++]);
 		if (path == NULL)
 			return (FAILURE);
-		ft_free_str(temp);
 		if (open_for_check(path) == SUCCESS)
 		{
+			ft_free_vector(paths);
 			ft_free_str(*cmd);
 			*cmd = path;
 			return (SUCCESS);
 		}
 		ft_free_str(path);
 	}
-	return (FAILURE);
+	ft_free_vector(paths);
+	return (127);
 }
 
-int	get_fullpath(char *content, t_info *info)
+int	get_fullpath(char **content, t_info *info)
 {
 	int	stat;
 
-	if (ft_strncmp(content, "cd", 3) == 0
-		|| ft_strncmp(content, "echo", 5) == 0
-		|| ft_strncmp(content, "env", 5) == 0
-		|| ft_strncmp(content, "exit", 5) == 0
-		|| ft_strncmp(content, "export", 5) == 0
-		|| ft_strncmp(content, "pwd", 5) == 0
-		|| ft_strncmp(content, "unset", 5) == 0)
+	if (classify_builtin(*content) != NONE)
 		return (SUCCESS);
-	info->binary = content;
-	stat = concat_path(&content, info->env, 0);
+	stat = concat_path(content, info->env, 0);
 	if (stat == SUCCESS)
-		info->fullpath = content;
+		info->fullpath = *content;
 	else if (stat == FAILURE)
-		ft_print_error("command not found", NULL, info->binary);
+		ft_print_error(NULL, NULL, strerror(errno));
+	else if (stat == 127)
+	{
+		if (open_for_check(*content) == SUCCESS)
+		{
+			info->fullpath = *content;
+			stat = SUCCESS;
+		}
+		else
+			ft_print_error("command not found", NULL, *content);
+	}
 	return (stat);
 }

@@ -23,10 +23,12 @@ static int	join_remainder(char *content, t_info *info)
 	space_loc = 0;
 	while (content[space_loc] != ' ')
 		++space_loc;
-	temp = info->remainder;
-	info->remainder = ft_strjoin(info->remainder, &content[space_loc + 1]);
-	if (temp != NULL)
-		return (ft_free_str(temp));
+	temp = ft_strjoin(info->remainder, &content[space_loc]);
+	if (temp == NULL)
+		return (FAILURE);
+	if (info->remainder != NULL)
+		ft_free_str(info->remainder);
+	info->remainder = temp;
 	content[space_loc] = '\0';
 	return (SUCCESS);
 }
@@ -48,7 +50,7 @@ static int	input_redir(char *content, t_info *info)
 		if (info->fd[INFILE] == -1)
 			return (FAILURE);
 		if (dup2(info->fd[INFILE], STDIN_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	return (SUCCESS);
 }
@@ -61,7 +63,7 @@ static int	output_redir(char *content, t_info *info)
 		if (info->fd[OUTFILE] == -1)
 			return (FAILURE);
 		if (dup2(info->fd[OUTFILE], STDOUT_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	else if (info->prev_dir == OUT_APPEND)
 	{
@@ -69,7 +71,7 @@ static int	output_redir(char *content, t_info *info)
 		if (info->fd[OUTFILE] == -1)
 			return (FAILURE);
 		if (dup2(info->fd[OUTFILE], STDOUT_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	return (SUCCESS);
 }

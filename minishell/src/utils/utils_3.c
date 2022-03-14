@@ -40,14 +40,19 @@ int	ft_free_str(char *str)
 int	ft_print_error(char *cmd, char *arg, char *error)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
+	if (cmd != NULL)
+	{
+		ft_putstr_fd(cmd, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+	}
 	if (arg != NULL)
 	{
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 	}
-	ft_putendl_fd(error, STDERR_FILENO);
+	if (error != NULL)
+		ft_putstr_fd(error, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 	return (FAILURE);
 }
 

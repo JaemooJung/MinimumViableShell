@@ -49,10 +49,9 @@ void	delete_node(t_list *lst)
 		lst->prev->next = lst->next;
 		lst->next->prev = lst->prev;
 	}
-	free(lst->line);
-	lst->line = 0;
+	ft_free_str(lst->line);
 	free(lst);
-	lst = 0;
+	lst = NULL;
 }
 
 void	*ft_free_lst(t_list *lst)
@@ -60,7 +59,7 @@ void	*ft_free_lst(t_list *lst)
 	t_list	*temp;
 
 	if (!lst) 
-	return (NULL);
+		return (NULL);
 	while (lst->next != NULL)
 	{
 		temp = lst->next;

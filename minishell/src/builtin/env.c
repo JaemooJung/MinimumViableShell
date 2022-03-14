@@ -23,12 +23,3 @@ int	mvs_env(char **chunk, t_list *env)
 	}
 	return (SUCCESS);
 }
-
-/*
-int main(int ac, char **av, char **envp)
-{
-	t_list *env;
-
-	env = envp_to_ours(envp);
-	mvs_env(env);
-}*/
