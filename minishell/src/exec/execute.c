@@ -71,7 +71,7 @@ int	builtin_or_not(char *content, t_info *info)
 	cmd = ft_strjoin(content, info->remainder);
 	if (cmd == NULL)
 		return (FAILURE);
-	chunk = mvs_split(content);
+	chunk = mvs_split(cmd);
 	if (chunk == NULL)
 	{
 		ft_free_str(cmd);
@@ -82,7 +82,7 @@ int	builtin_or_not(char *content, t_info *info)
 	if (builtin != NONE && info->wasthereanypipe == false)
 		stat = builtins[builtin](chunk, info->env);
 	else
-		stat = lets_exec(content, info, chunk);
+		stat = lets_exec(cmd, info, chunk);
 	info->pipeexists = false;
 	ft_free_str(cmd);
 	ft_free_vector(chunk);
