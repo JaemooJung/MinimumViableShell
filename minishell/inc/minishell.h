@@ -10,15 +10,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-
+# include <termios.h>
 # include "parse_user_input.h"
 # include "debug.h"
 
 # define SPACE ' '
 # define SQUOTE '\''
 # define DQUOTE '\"'
-
-# define MALLOC_ERROR 1
 
 # define INFILE 0
 # define OUTFILE 1
@@ -109,5 +107,8 @@ size_t	ft_lstsize(t_list *lst);
 
 /* ?????? */
 void run_tokens(t_ast_node *node, t_list *env);
+
+/* signal */
+void	signal_handler_init(void);
 
 #endif

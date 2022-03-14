@@ -2,7 +2,8 @@ NAME 		=	minishell
 
 CC 			=	gcc
 CFLAGS		=	-g
-READLINE	=	-L/usr/local/opt/readline/lib -lreadline -I/usr/local/opt/readline/include
+RL_LINK		=	-lreadline -L/usr/local/opt/readline/lib
+RL_INCLUDE	=	-I/usr/local/opt/readline/include
 #READLINE	=	-L/opt/homebrew/opt/readline/lib -lreadline -I/opt/homebrew/opt/readline/include
 RM			=	rm -f
 
@@ -17,6 +18,7 @@ FILES 		=	main.c \
 				parse_user_input/parser_utils.c \
 				parse_user_input/parser_utils_2.c \
 				parse_user_input/tree_utils.c \
+				parse_user_input/compare_and_join_env.c \
 				parse_user_input/expand_env.c \
 				builtin/cd.c \
 				builtin/echo.c \
@@ -34,6 +36,7 @@ FILES 		=	main.c \
 				utils/utils_3.c \
 				utils/utils_4.c \
 				our_env.c \
+				signal_handler.c \
 				debug/debug_print.c \
 				exec/redirection.c \
 
@@ -48,10 +51,10 @@ OBJS		=	$(SRCS:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(INC_DIR) -c -o $@ $<
+	$(CC) $(CFLAGS) -I$(INC_DIR) $(RL_INCLUDE) -c -o $@ $<
 
 $(NAME): $(OBJS)
-	$(CC) $(READLINE) -o $@ $^
+	$(CC) $(RL_LINK) -o $@ $^
 
 clean:
 	$(RM) $(OBJS)
