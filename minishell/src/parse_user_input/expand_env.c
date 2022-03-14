@@ -35,7 +35,7 @@ int	join_unquoted_string(char **str, char *unquoted, int q_idx, int q_len)
 	return (rtn_len);
 }
 
-int	unquote_str(char **str_to_expand, int i, t_list *our_env)
+int	unquote_str(char **str_to_expand, int i, t_list *our_env, int exit_status)
 {
 	char	*quoted_str;
 	int		quote_str_len;
@@ -53,14 +53,14 @@ int	unquote_str(char **str_to_expand, int i, t_list *our_env)
 		while (quoted_str[j])
 		{
 			if (quoted_str[j] == '$')
-				compare_and_join_env(&quoted_str, our_env, j);
+				compare_and_join_env(&quoted_str, our_env, j, exit_status);
 			j++;
 		}
 	}
 	return (join_unquoted_string(str_to_expand, quoted_str, i, quote_str_len));
 }
 
-int	expand_env_in_str_and_unquote(char **str, t_list *our_env)
+int	expand_env_in_str_and_unquote(char **str, t_list *our_env, int exit_status)
 {
 	int		i;
 
@@ -68,10 +68,10 @@ int	expand_env_in_str_and_unquote(char **str, t_list *our_env)
 	while ((*str)[i])
 	{
 		if ((*str)[i] == '$' && (*str)[i + 1] != '\0')
-			compare_and_join_env(str, our_env, i);
+			compare_and_join_env(str, our_env, i, exit_status);
 		else if ((*str)[i] == '\"' || (*str)[i] == '\'')
 		{
-			i = unquote_str(str, i, our_env);
+			i = unquote_str(str, i, our_env, exit_status);
 			if (i < 0)
 				return (i);
 			continue ;
@@ -81,7 +81,7 @@ int	expand_env_in_str_and_unquote(char **str, t_list *our_env)
 	return (0);
 }
 
-int	expand_env(t_ast_node *tree, t_list *our_env)
+int	expand_env(t_ast_node *tree, t_list *our_env, int exit_status)
 {
 	int	rtn_val;
 
@@ -89,14 +89,14 @@ int	expand_env(t_ast_node *tree, t_list *our_env)
 		return (0);
 	if (tree->content != NULL)
 	{
-		rtn_val = expand_env_in_str_and_unquote(&(tree->content), our_env);
+		rtn_val = expand_env_in_str_and_unquote(&(tree->content), our_env, exit_status);
 		if (rtn_val < 0)
 			return (rtn_val);
 	}
-	rtn_val = expand_env(tree->left, our_env);
+	rtn_val = expand_env(tree->left, our_env, exit_status);
 	if (rtn_val < 0)
 		return (rtn_val);
-	rtn_val = expand_env(tree->right, our_env);
+	rtn_val = expand_env(tree->right, our_env, exit_status);
 	if (rtn_val < 0)
 		return (rtn_val);
 	return (0);

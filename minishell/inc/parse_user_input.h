@@ -60,9 +60,10 @@ int			lexer(t_list *splitted, t_token **tokens);
 int			parse_pipeline(t_ast_node **root, t_token **tokens);
 int			parser(t_token **tokens, t_ast_node **tree);
 
-int			compare_and_join_env(char **str_to_expand, t_list *our_env, int i);
-int			expand_env(t_ast_node *tree, t_list *our_env);
+int			compare_and_join_env(char **str_to_expand, t_list *our_env, int i, int exit_status);
+int			expand_env(t_ast_node *tree, t_list *our_env, int exit_status);
 
-int			parse_user_input(const char *input, t_ast_node **tree, t_list *our_env);
+int			parse_user_input(const char *input, t_ast_node **tree,
+				t_list *our_env, int exit_status);
 
 #endif

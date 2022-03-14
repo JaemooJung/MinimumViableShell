@@ -81,7 +81,7 @@ void	minimum_viable_shell(t_list *env)
 	}
 	if (cmdline[0] != '\0')
 		add_history(cmdline);
-	err_code = parse_user_input(cmdline, &tree, env);
+	err_code = parse_user_input(cmdline, &tree, env, exit_status);
 	if (err_code)
 	{
 		if (err_code == UNCLOSED_QUOTE)
@@ -90,7 +90,7 @@ void	minimum_viable_shell(t_list *env)
 		ft_free_str(cmdline);
 		return ;
 	}
-//	print_parsed(tree);
+	print_parsed(tree);
 //	collect_remainders(tree);
 //	print_parsed(tree);
 	run_tokens(tree, env, &exit_status);
