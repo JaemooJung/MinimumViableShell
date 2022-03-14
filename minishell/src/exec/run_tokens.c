@@ -43,6 +43,15 @@ static void	clear_info(t_info *info)
 		close(info->fd[1]);
 }
 
+void	ft_print_lst(t_list *lst)
+{
+	while (lst != NULL)
+	{
+		printf("%s\n", lst->line);
+		lst = lst->next;
+	}
+}
+
 void	run_tokens(t_ast_node *node, t_list *env, int *exit_status)
 {
 	int		origin[2];

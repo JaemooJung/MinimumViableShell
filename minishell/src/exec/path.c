@@ -34,6 +34,8 @@ static int	concat_path(char **cmd, t_list *env, int i)
 	char	**paths;
 	char	*path;
 
+	if (get_value(env, "PATH") == NULL)
+		return (127);
 	paths = ft_split(get_value(env, "PATH") + 5, ':');
 	if (paths == NULL)
 		return (FAILURE);
