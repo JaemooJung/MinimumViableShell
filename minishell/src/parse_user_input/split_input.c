@@ -7,7 +7,7 @@ static bool	m_is_sign(char c)
 	return (false);
 }
 
-int get_sign_len(char const *input)
+int	get_sign_len(char const *input)
 {
 	int		i;
 	int		len;
@@ -50,14 +50,14 @@ int	get_token_len(char const *input)
 			is_double_quote_on = !is_double_quote_on;
 		else if (input[i] == '\'')
 			is_single_quote_on = !is_single_quote_on;
-		else if (input[i] == ' ' && (!is_double_quote_on && !is_single_quote_on))
+		else if (input[i] == ' '
+			&& (!is_double_quote_on && !is_single_quote_on))
 			break ;
-		else if (m_is_sign(input[i]) && (!is_double_quote_on && !is_single_quote_on))
+		else if (m_is_sign(input[i])
+			&& (!is_double_quote_on && !is_single_quote_on))
 			break ;
 		i++;
 	}
-	if (is_double_quote_on || is_single_quote_on)
-		return (-1);
 	return (i);
 }
 
@@ -71,8 +71,6 @@ int	split_input(char const *input, t_list **splitted)
 	while (*input != '\0')
 	{
 		token_len = get_token_len(input);
-		if (token_len == -1)
-			return (UNCLOSED_QUOTE);
 		node = ft_lstnew(ft_substr(input, 0, token_len));
 		if (node == NULL || node->line == NULL)
 			return (MALLOC_ERR);

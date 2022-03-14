@@ -10,15 +10,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-
+# include <termios.h>
 # include "parse_user_input.h"
 # include "debug.h"
 
 # define SPACE ' '
 # define SQUOTE '\''
 # define DQUOTE '\"'
-
-# define MALLOC_ERROR 1
 
 # define INFILE 0
 # define OUTFILE 1
@@ -139,5 +137,8 @@ int		get_fullpath(char **content, t_info *info);
 
 /* ?????? */
 void run_tokens(t_ast_node *node, t_list *env, int *exit_status);
+
+/* signal */
+void	signal_handler_init(void);
 
 #endif
