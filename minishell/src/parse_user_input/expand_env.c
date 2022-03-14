@@ -57,8 +57,6 @@ int	unquote_str(char **str_to_expand, int i, t_list *our_env)
 			j++;
 		}
 	}
-	printf("%d\n", quote_str_len);
-	printf("%s\n", quoted_str);
 	return (join_unquoted_string(str_to_expand, quoted_str, i, quote_str_len));
 }
 

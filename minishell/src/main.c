@@ -117,7 +117,5 @@ int	main(int argc, char **argv, char **envp)
 	if (add_shlvl(our_env) == FAILURE)
 		;
 	while (1)
-	{
 		minimum_viable_shell(our_env);
-	}
 }

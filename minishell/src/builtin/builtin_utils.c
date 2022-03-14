@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:47:52 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/12 14:47:54 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/14 14:28:59 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	builtins_init(int (*func[])(char **, t_list *))
 {
 	func[CD] = mvs_cd;
-	func[ECHO] = mvs_echo;
+	func[M_ECHO] = mvs_echo;
 	func[ENV] = mvs_env;
 	func[EXIT] = mvs_exit;
 	func[EXPORT] = mvs_export;
@@ -28,7 +28,7 @@ int	classify_builtin(char *str)
 	if (ft_strncmp(str, "cd", 3) == 0)
 		return (CD);
 	else if (ft_strncmp(str, "echo", 5) == 0)
-		return (ECHO);
+		return (M_ECHO);
 	else if (ft_strncmp(str, "env", 4) == 0)
 		return (ENV);
 	else if (ft_strncmp(str, "exit", 5) == 0)

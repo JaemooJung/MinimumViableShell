@@ -39,7 +39,7 @@ typedef enum e_open
 typedef enum e_builtins
 {
 	CD,
-	ECHO,
+	M_ECHO,
 	ENV,
 	EXIT,
 	EXPORT,

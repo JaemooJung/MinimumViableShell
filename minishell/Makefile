@@ -4,7 +4,8 @@ CC 			=	gcc
 CFLAGS		=	-g
 RL_LINK		=	-lreadline -L/usr/local/opt/readline/lib
 RL_INCLUDE	=	-I/usr/local/opt/readline/include
-#READLINE	=	-L/opt/homebrew/opt/readline/lib -lreadline -I/opt/homebrew/opt/readline/include
+#RL_LINK	=	-L/opt/homebrew/opt/readline/lib -lreadline 
+#RL_INCLUDE	=	-I/opt/homebrew/opt/readline/include
 RM			=	rm -f
 
 FILES 		=	main.c \
@@ -28,6 +29,7 @@ FILES 		=	main.c \
 				builtin/export.c \
 				builtin/pwd.c \
 				builtin/unset.c \
+				builtin/builtin_utils.c \
 				utils/ft_split.c \
 				utils/list_1.c \
 				utils/list_2.c \
@@ -35,10 +37,16 @@ FILES 		=	main.c \
 				utils/utils_2.c \
 				utils/utils_3.c \
 				utils/utils_4.c \
+				utils/utils_5.c \
 				our_env.c \
 				signal_handler.c \
 				debug/debug_print.c \
-				exec/redirection.c \
+				exec/execute.c \
+				exec/path.c \
+				exec/pipe_n_dup.c \
+				exec/redir_utils.c \
+				exec/redir.c \
+				exec/run_tokens.c \
 
 SRC_DIR		=	./src/
 INC_DIR		=	./inc
