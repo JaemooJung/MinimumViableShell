@@ -54,12 +54,12 @@ int	mvs_exit(char **chunk, t_list *env)
 	}
 	if (i > 2)
 	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments", 2);
+		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
 		return (FAILURE);
 	}
 	if (can_be_atoied(chunk[1]) == false)
 	{
-		ft_putstr_fd("exit\nminishell: exit: abc: numeric argument required", 2);
+		ft_putstr_fd("exit\nminishell: exit: abc: numeric argument required\n", 2);
 		exit(255);
 	}
 	ft_putstr_fd("exit\n", 1);

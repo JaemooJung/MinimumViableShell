@@ -39,16 +39,16 @@ static int	input_redir(char *content, t_info *info)
 	{
 		info->fd[INFILE] = mvs_open(content, READ);
 		if (info->fd[INFILE] == -1)
-			return (FAILURE);
+			return (ft_print_error(NULL, content, strerror(errno)));
 		if (dup2(info->fd[INFILE], STDIN_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	else if (info->prev_dir == IN_HEREDOC)
 	{
 		info->fd[INFILE] = mvs_open("mvs_temp", WRITE);
 		here_doc(info->fd[INFILE], content);
 		if (info->fd[INFILE] == -1)
-			return (FAILURE);
+			return (ft_print_error(NULL, content, strerror(errno)));
 		if (dup2(info->fd[INFILE], STDIN_FILENO) == -1)
 			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
@@ -61,7 +61,7 @@ static int	output_redir(char *content, t_info *info)
 	{
 		info->fd[OUTFILE] = mvs_open(content, WRITE);
 		if (info->fd[OUTFILE] == -1)
-			return (FAILURE);
+			return (ft_print_error(NULL, content, strerror(errno)));
 		if (dup2(info->fd[OUTFILE], STDOUT_FILENO) == -1)
 			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
@@ -69,7 +69,7 @@ static int	output_redir(char *content, t_info *info)
 	{
 		info->fd[OUTFILE] = mvs_open(content, APPEND);
 		if (info->fd[OUTFILE] == -1)
-			return (FAILURE);
+			return (ft_print_error(NULL, content, strerror(errno)));
 		if (dup2(info->fd[OUTFILE], STDOUT_FILENO) == -1)
 			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}

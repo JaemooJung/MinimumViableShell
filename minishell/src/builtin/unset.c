@@ -21,6 +21,20 @@ static bool	is_valid_identifier(char *str)
 	return (true);
 }
 
+static void	delete_head(t_list **env)
+{
+	t_list	*temp;
+
+	if ((*env)->next == NULL)
+	{
+		delete_node(*env);
+		return ;
+	}
+	temp = *env;
+	*env = temp->next;
+	delete_node(temp);
+}
+
 static void	find_n_remove(t_list *env, char *str)
 {
 	while (env != NULL)
@@ -29,7 +43,10 @@ static void	find_n_remove(t_list *env, char *str)
 			&& (env->line[ft_strlen(str)] == '='
 				|| env->line[ft_strlen(str)] == '\0'))
 		{
-			delete_node(env);
+			if (env->prev == NULL || ft_strncmp(env->line, "PATH", ft_strlen(str)) == 0)
+				delete_head(&env);
+			else
+				delete_node(env);
 			return ;
 		}
 		env = env->next;
