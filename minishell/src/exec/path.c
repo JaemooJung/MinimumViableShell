@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	open_for_check(char *path)
+static int	open_for_check(char *path)
 {
 	int	fd;
 

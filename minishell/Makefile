@@ -34,6 +34,7 @@ FILES 		=	main.c \
 				utils/utils_2.c \
 				utils/utils_3.c \
 				utils/utils_4.c \
+				utils/utils_5.c \
 				our_env.c \
 				exec/run_tokens.c \
                 exec/redir.c \

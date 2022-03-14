@@ -82,13 +82,29 @@ char	**to_vector(t_list *env)
 	return (envp);
 }
 
-void	ft_printlist(t_list *lst)
+int	add_shlvl(t_list *env)
 {
-	if (lst == 0)
-		return ;
-	while (lst != 0)
+	int		shlvl;
+	char	*newlvl;
+	char	*temp;
+
+	while (env != NULL)
 	{
-		printf("%s\n", lst->line);
-		lst = lst->next;
+		if (ft_strncmp(env->line, "SHLVL=", 6) == 0)
+			break ;
+		env = env->next;
 	}
+	if (env == NULL)
+		return (SUCCESS);
+	shlvl = ft_atoi(env->line + 6);
+	temp = ft_itoa(++shlvl);
+	if (temp == NULL)
+		return (FAILURE);
+	newlvl = ft_strjoin("SHLVL=", temp);
+	if (newlvl == NULL)
+		return (ft_free_str(temp));
+	ft_free_str(temp);
+	ft_free_str(env->line);
+	env->line = newlvl;
+	return (SUCCESS);
 }

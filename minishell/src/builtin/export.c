@@ -88,9 +88,6 @@ static int	print_sorted(t_list *env)
 	ft_free_lst_wo_dup(temp);
 	return (SUCCESS);
 }
-// 인자 검사하고 ->
-//	‘=‘이 있을 때	키가 없으면 더해주고 이미 키가 존재하면 대체해준다.
-//	‘=‘이 없을 때	키가 없으면 더해주고 이미 키가 존재하면 패스
 
 int	mvs_export(char **chunk, t_list *env)
 {

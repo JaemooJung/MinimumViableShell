@@ -25,5 +25,6 @@ int	lets_pipe(t_info *info)
 	if (pipe(info->pipe) == -1)
 		return (FAILURE);
 	info->pipeexists = true;
+	info->wasthereanypipe = true;
 	return (SUCCESS);
 }

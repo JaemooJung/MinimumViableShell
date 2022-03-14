@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	execute_tree(t_ast_node *node, t_info *info)
+static void	execute_tree(t_ast_node *node, t_info *info)
 {
 	if (node->node_type == NODE_PIPE && node->right != NULL)
 		info->exit_status = lets_pipe(info);
@@ -14,7 +14,7 @@ void	execute_tree(t_ast_node *node, t_info *info)
 		info->exit_status = builtin_or_not(node->content, info);
 }
 
-void	search_tree(t_ast_node *node, t_info *info)
+static void	search_tree(t_ast_node *node, t_info *info)
 {
 	execute_tree(node, info);
 	if (node->left != NULL)
@@ -27,6 +27,7 @@ static void	init_info(t_info *info)
 {
 	info->exit_status = SUCCESS;
 	info->pipeexists = false;
+	info->wasthereanypipe = false;
 	info->remainder = NULL;
 	info->fd[0] = -1;
 	info->fd[1] = -1;

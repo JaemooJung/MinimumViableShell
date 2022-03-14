@@ -71,15 +71,19 @@ typedef struct s_necessities
 	int 	fd[2];
 	int 	prev_dir;
 	bool	pipeexists;
+	bool	wasthereanypipe;
 	char	*remainder;
 	char	*fullpath;
 	t_list	*env;
 }	t_info;
 
+void	collect_remainders(t_ast_node *tree);
+
 /* envp friends */
 t_list	*envp_to_ours(char **envp);
 char	*get_value(t_list *env, char *key);
 int		append_to_env(t_list *env, char *str);
+int		add_shlvl(t_list *env);
 char	**to_vector(t_list *env);
 /* builtins */
 int		mvs_echo(char **chunk, t_list *env);
@@ -107,8 +111,9 @@ void	ft_putendl_fd(char *s, int fd);
 int		ft_print_error(char *cmd, char *arg, char *error);
 int		ft_free_str(char *str);
 void	ft_free_vector(char **vector);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	dequote(char *str);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
 
 /* list */
@@ -116,7 +121,6 @@ t_list	*ft_lstnew(char *line);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*copy_list(t_list *src);
 t_list	*sort_list(t_list *lst, int (*cmp)(const char *, const char *, size_t));
-void	ft_printlist(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	delete_node(t_list *lst);
 void	*ft_free_lst(t_list *lst);
