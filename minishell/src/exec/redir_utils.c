@@ -20,6 +20,8 @@ int	here_doc(int infile, char *limiter)
 	while (1)
 	{
 		line = readline("> ");
+		if (line == NULL)
+			break ;
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 		{
 			ft_free_str(line);

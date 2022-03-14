@@ -54,7 +54,6 @@ int	join_env_string(char **str, char *env_string, int dollar_idx, int name_len)
 	fore = ft_strdup(*str);
 	fore[dollar_idx] = '\0';
 	back = ft_strdup(*str + dollar_idx + name_len + 1);
-	//printf("fore: [%s] || env: [%s] || back: [%s]\n", fore, env_string, back);
 	fore_and_env = ft_strjoin(fore, env_string);
 	full_str = ft_strjoin(fore_and_env, back);
 	ft_free_str(fore);
@@ -65,14 +64,22 @@ int	join_env_string(char **str, char *env_string, int dollar_idx, int name_len)
 	return (0);
 }
 
-int	compare_and_join_env(char **str_to_expand, t_list *our_env, int i)
+int	compare_and_join_env(char **str_to_expand, t_list *our_env,
+							int i, int exit_status)
 {
 	int		name_len;
 	char	*name;
 	char	*env_string;
 
 	if ((*str_to_expand)[i + 1] == '?')
-		;//expand_exit_status(); // TODO: 나중에 이어붙이기
+	{
+		env_string = ft_itoa(exit_status);
+		if (env_string == NULL)
+			return (MALLOC_ERR);
+		join_env_string(str_to_expand, env_string, i, 1);
+		ft_free_str(env_string);
+		return (0);
+	}
 	name_len = get_env_name_len(*str_to_expand + i + 1);
 	if (name_len == 0)
 		return (0);
@@ -83,8 +90,6 @@ int	compare_and_join_env(char **str_to_expand, t_list *our_env, int i)
 	if (env_string)
 	{
 		join_env_string(str_to_expand, env_string, i, name_len);
-		// printf("%s\n", str_to_expand);
-		// printf("%c\n", str_to_expand[i]);
 		ft_free_str(env_string);
 	}
 	ft_free_str(name);
