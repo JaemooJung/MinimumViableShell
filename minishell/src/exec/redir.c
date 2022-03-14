@@ -50,7 +50,7 @@ static int	input_redir(char *content, t_info *info)
 		if (info->fd[INFILE] == -1)
 			return (FAILURE);
 		if (dup2(info->fd[INFILE], STDIN_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	return (SUCCESS);
 }
@@ -63,7 +63,7 @@ static int	output_redir(char *content, t_info *info)
 		if (info->fd[OUTFILE] == -1)
 			return (FAILURE);
 		if (dup2(info->fd[OUTFILE], STDOUT_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	else if (info->prev_dir == OUT_APPEND)
 	{
@@ -71,7 +71,7 @@ static int	output_redir(char *content, t_info *info)
 		if (info->fd[OUTFILE] == -1)
 			return (FAILURE);
 		if (dup2(info->fd[OUTFILE], STDOUT_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	return (SUCCESS);
 }

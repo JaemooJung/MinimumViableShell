@@ -80,7 +80,7 @@ void	minimum_viable_shell(t_list *env)
 		ft_free_str(cmdline);
 		return ;
 	}
-	print_parsed(tree);
+//	print_parsed(tree);
 //	collect_remainders(tree);
 //	print_parsed(tree);
 	run_tokens(tree, env, &exit_status);

@@ -13,7 +13,7 @@ static int	do_child_proc(char **cmd_splitted, t_info *info, char **chunk)
 	{
 		close(info->pipe[0]);
 		if (dup2(info->pipe[1], STDOUT_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	builtins_init(builtins);
 	builtin = classify_builtin(chunk[0]);
@@ -31,7 +31,7 @@ static int	do_parent_proc(pid_t pid, t_info *info)
 	{
 		close(info->pipe[1]);
 		if (dup2(info->pipe[0], STDIN_FILENO) == -1)
-			return (FAILURE);
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
 	waitpid(pid, &status, 0);
 	if (info->pipeexists)
@@ -52,7 +52,7 @@ static int	lets_exec(char *cmd, t_info *info, char **chunk)
 		return (FAILURE);
 	pid = fork();
 	if (pid == -1)
-		return (FAILURE);
+		return (ft_print_error("You've got broken fork...", NULL, NULL));
 	if (pid == 0)
 		do_child_proc(cmd_splitted, info, chunk);
 	do_parent_proc(pid, info);
