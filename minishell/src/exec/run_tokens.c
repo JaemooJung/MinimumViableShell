@@ -8,13 +8,13 @@ static void	execute_tree(t_ast_node *node, t_info *info)
 		info->mid_status = lets_pipe(info);
 	}
 	else if (info->mid_status == SUCCESS && node->node_type == NODE_REDIR_TYPE)
-		info->mid_status = teach_me_direction(node->content, info);
+		info->mid_status = teach_me_direction(node->file_path, info);
 	else if (info->mid_status == SUCCESS && node->node_type == NODE_FILE_NAME)
-		info->mid_status = redir_n_join_remainder(node->content, info);
+		info->mid_status = redir_n_join_remainder(node->argv, info);
 	else if (info->mid_status == SUCCESS && node->node_type == NODE_FILE_PATH)
-		info->mid_status = get_fullpath(&node->content, info);
+		info->mid_status = get_fullpath(&node->file_path, info);
 	else if (info->mid_status == SUCCESS && node->node_type == NODE_ARGV)
-		info->exit_status = builtin_or_not(node->content, info);
+		info->exit_status = builtin_or_not(node->argv, info);
 }
 
 static void	search_tree(t_ast_node *node, t_info *info)
@@ -39,8 +39,8 @@ static void	init_info(t_info *info)
 
 static void	clear_info(t_info *info)
 {
-	if (info->remainder != NULL)
-		ft_free_str(info->remainder);
+//	if (info->remainder != NULL)
+//		ft_free_lst(info->remainder);
 	if (info->fd[0] != -1)
 		close(info->fd[0]);
 	if (info->fd[1] != -1)

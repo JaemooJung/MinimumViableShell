@@ -15,24 +15,6 @@ int	teach_me_direction(char *content, t_info *info)
 	return (SUCCESS);
 }
 
-static int	join_remainder(char *content, t_info *info)
-{
-	int		space_loc;
-	char	*temp;
-
-	space_loc = 0;
-	while (content[space_loc] != ' ')
-		++space_loc;
-	temp = ft_strjoin(info->remainder, &content[space_loc]);
-	if (temp == NULL)
-		return (FAILURE);
-	if (info->remainder != NULL)
-		ft_free_str(info->remainder);
-	info->remainder = temp;
-	content[space_loc] = '\0';
-	return (SUCCESS);
-}
-
 static int	input_redir(char *content, t_info *info)
 {
 	if (info->prev_dir == IN_REDIR)
@@ -78,21 +60,23 @@ static int	output_redir(char *content, t_info *info)
 	return (SUCCESS);
 }
 
-int	redir_n_join_remainder(char *content, t_info *info)
+int	redir_n_join_remainder(t_list *content, t_info *info)
 {
 	int	fd;
 
-	if (ft_strchr(content, ' ') != NULL)
-		if (join_remainder(content, info) == FAILURE)
-			return (FAILURE);
+	if (ft_lstsize(content) > 1)
+	{
+		ft_lstadd_back(&info->remainder, content->next);
+		content->next = NULL;
+	}
 	if (info->prev_dir == IN_REDIR || info->prev_dir == IN_HEREDOC)
 	{
-		if (input_redir(content, info) == FAILURE)
+		if (input_redir(content->line, info) == FAILURE)
 			return (FAILURE);
 	}
 	else if (info->prev_dir == OUT_REDIR || info->prev_dir == OUT_APPEND)
 	{
-		if (output_redir(content, info) == FAILURE)
+		if (output_redir(content->line, info) == FAILURE)
 			return (FAILURE);
 	}
 	return (SUCCESS);
