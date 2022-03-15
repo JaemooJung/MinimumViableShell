@@ -64,14 +64,16 @@ typedef struct s_list
 
 typedef struct s_necessities
 {
-	int		exit_status;
+	int		mid_status;
+	int 	exit_status;
 	int		pipe[2];
 	int 	fd[2];
+	int 	origin[2];
 	int 	prev_dir;
 	bool	pipeexists;
 	bool	wasthereanypipe;
-	char	*remainder;
 	char	*fullpath;
+	t_list	*remainder;
 	t_list	*env;
 }	t_info;
 
@@ -129,10 +131,10 @@ int		keep_stdio(int *origin);
 int		restore_stdio(int *origin);
 int		lets_pipe(t_info *info);
 int		here_doc(int infile, char *limiter);
-int		builtin_or_not(char *content, t_info *info);
+int		builtin_or_not(t_list *content, t_info *info);
 int		mvs_open(char *file, int mode);
 int		teach_me_direction(char *content, t_info *info);
-int		redir_n_join_remainder(char *content, t_info *info);
+int		redir_n_join_remainder(t_list *content, t_info *info);
 int		get_fullpath(char **content, t_info *info);
 
 /* ?????? */
@@ -140,5 +142,8 @@ void run_tokens(t_ast_node *node, t_list *env, int *exit_status);
 
 /* signal */
 void	signal_handler_init(void);
+void	signal_waiting_for_new_shell(void);
+
+void	ft_print_lst(t_list *lst);
 
 #endif
