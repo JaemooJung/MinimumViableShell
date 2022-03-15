@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 22:41:08 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/15 13:55:56 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/15 15:45:53 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,41 +28,6 @@ t_list	*make_argv(t_token **token)
 	}
 	return (argv);
 }
-
-// char	*conv_str_join(char *argv, char *new_str)
-// {
-// 	char	*tmp;
-
-// 	tmp = argv;
-// 	argv = j_strjoin(argv, new_str);
-// 	if (argv == NULL)
-// 		return (NULL);
-// 	if (tmp != NULL)
-// 	{
-// 		free(tmp);
-// 		tmp = NULL;
-// 	}
-// 	return (argv);
-// }
-
-// char	*make_argv(t_token **tokens)
-// {
-// 	char	*argv;
-
-// 	argv = NULL;
-// 	while ((*tokens)->type == T_WORD)
-// 	{
-// 		argv = conv_str_join(argv, (*tokens)->value);
-// 		if (argv == NULL)
-// 			return (NULL);
-// 		if ((*tokens)[1].type == T_WORD)
-// 			argv = conv_str_join(argv, " ");
-// 		if (argv == NULL)
-// 			return (NULL);
-// 		(*tokens)++;
-// 	}
-// 	return (argv);
-// }
 
 void	print_parsed(t_ast_node *tree)
 {
