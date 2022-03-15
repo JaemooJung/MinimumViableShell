@@ -16,6 +16,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	if (*lst == 0)
 	{
 		*lst = new;
+		if (new->prev != NULL)
+			new->prev = NULL;
 		return ;
 	}
 	new->prev = ft_lstlast(*lst);
