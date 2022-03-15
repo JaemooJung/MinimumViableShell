@@ -44,3 +44,9 @@ void	signal_handler_init(void)
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 }
+
+void	signal_waiting_for_new_shell(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}

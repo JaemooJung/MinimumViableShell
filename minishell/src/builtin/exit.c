@@ -49,19 +49,21 @@ int	mvs_exit(char **chunk, t_list *env)
 		i++;
 	if (i == 1)
 	{
-		ft_putstr_fd("exit\n", 1);
+		ft_putendl_fd("exit", 1);
 		exit(EXIT_SUCCESS);
 	}
 	if (i > 2)
 	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
+		ft_putendl_fd("exit\nminishell: exit: too many arguments", 2);
 		return (FAILURE);
 	}
 	if (can_be_atoied(chunk[1]) == false)
 	{
-		ft_putstr_fd("exit\nminishell: exit: abc: numeric argument required\n", 2);
+		ft_putstr_fd("exit\nminishell: exit: ", 2);
+		ft_putstr_fd(chunk[1], 2);
+		ft_putendl_fd("numeric argument required", 2);
 		exit(255);
 	}
-	ft_putstr_fd("exit\n", 1);
+	ft_putendl_fd("exit", 1);
 	exit(ft_atoi(chunk[1]));
 }

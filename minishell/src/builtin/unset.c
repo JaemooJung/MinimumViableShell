@@ -43,7 +43,7 @@ static void	find_n_remove(t_list *env, char *str)
 			&& (env->line[ft_strlen(str)] == '='
 				|| env->line[ft_strlen(str)] == '\0'))
 		{
-			if (env->prev == NULL || ft_strncmp(env->line, "PATH", ft_strlen(str)) == 0)
+			if (env->prev == NULL)
 				delete_head(&env);
 			else
 				delete_node(env);

@@ -36,7 +36,7 @@ static int	concat_path(char **cmd, t_list *env, int i)
 
 	if (get_value(env, "PATH") == NULL)
 		return (127);
-	paths = ft_split(get_value(env, "PATH") + 5, ':');
+	paths = ft_split(get_value(env, "PATH"), ':');
 	if (paths == NULL)
 		return (FAILURE);
 	while (paths[i] != NULL)
@@ -76,7 +76,10 @@ int	get_fullpath(char **content, t_info *info)
 			stat = SUCCESS;
 		}
 		else
+		{
 			ft_print_error("command not found", NULL, *content);
+			info->exit_status = 127;
+		}
 	}
 	return (stat);
 }
