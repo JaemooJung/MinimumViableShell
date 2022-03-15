@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	do_child_proc(char **cmd_splitted, t_info *info, char **chunk)
+static int	do_child_proc(t_info *info, char **chunk)
 {
 	char	**envp;
 	int		builtin;
@@ -19,9 +19,9 @@ static int	do_child_proc(char **cmd_splitted, t_info *info, char **chunk)
 	builtin = classify_builtin(chunk[0]);
 	if (builtin != NONE)
 		exit(builtins[builtin](chunk, info->env));
-	execve(info->fullpath, cmd_splitted, envp);
-	if (execve(cmd_splitted[0], cmd_splitted, envp) == -1)
-		exit(126 + ft_print_error("command not found", NULL, cmd_splitted[0]));
+	execve(info->fullpath, chunk, envp);
+	if (execve(chunk[0], chunk, envp) == -1)
+		exit(126 + ft_print_error("command not found", NULL, chunk[0]));
 	return (SUCCESS);
 }
 
@@ -46,51 +46,39 @@ static int	do_parent_proc(char *cmd, pid_t pid, t_info *info)
 	return (SUCCESS);
 }
 
-static int	lets_exec(char *cmd, t_info *info, char **chunk)
+static int	lets_exec(t_info *info, char **chunk)
 {
-	char	**cmd_splitted;
 	pid_t	pid;
 
-	cmd_splitted = mvs_split(cmd);
-	if (cmd_splitted == NULL)
-		return (FAILURE);
 	if (info->fullpath == NULL)
 		return (FAILURE);
 	pid = fork();
 	if (pid == -1)
 		return (ft_print_error("You've got broken fork...", NULL, NULL));
 	if (pid == 0)
-		do_child_proc(cmd_splitted, info, chunk);
-	do_parent_proc(cmd_splitted[0], pid, info);
-	ft_free_vector(cmd_splitted);
+		do_child_proc(info, chunk);
+	do_parent_proc(chunk[0], pid, info);
 	return (info->exit_status);
 }
 
-int	builtin_or_not(char *content, t_info *info)
+int	builtin_or_not(t_list *content, t_info *info)
 {
 	char	**chunk;
-	char	*cmd;
 	int		stat;
 	int		builtin;
 	int		(*builtins[8])(char **, t_list *);
 
-	cmd = ft_strjoin(content, info->remainder);
-	if (cmd == NULL)
-		return (FAILURE);
-	chunk = mvs_split(cmd);
+	ft_lstadd_back(&content, info->remainder);
+	chunk = to_vector(content);
 	if (chunk == NULL)
-	{
-		ft_free_str(cmd);
 		return (FAILURE);
-	}
 	builtins_init(builtins);
 	builtin = classify_builtin(chunk[0]);
 	if (builtin != NONE && info->wasthereanypipe == false)
 		stat = builtins[builtin](chunk, info->env);
 	else
-		stat = lets_exec(cmd, info, chunk);
+		stat = lets_exec(info, chunk);
 	info->pipeexists = false;
-	ft_free_str(cmd);
-	ft_free_vector(chunk);
+	free(chunk);
 	return (stat);
 }
