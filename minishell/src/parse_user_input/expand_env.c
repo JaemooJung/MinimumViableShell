@@ -83,15 +83,27 @@ int	expand_env_in_str_and_unquote(char **str, t_list *our_env, int exit_status)
 
 int	expand_env(t_ast_node *tree, t_list *our_env, int exit_status)
 {
-	int	rtn_val;
+	int		rtn_val;
+	t_list	*tmp;
 
 	if (tree == NULL)
 		return (0);
-	if (tree->content != NULL)
+	if (tree->file_path != NULL)
 	{
-		rtn_val = expand_env_in_str_and_unquote(&(tree->content), our_env, exit_status);
+		rtn_val = expand_env_in_str_and_unquote(&(tree->file_path), our_env, exit_status);
 		if (rtn_val < 0)
 			return (rtn_val);
+	}
+	if (tree->argv != NULL)
+	{
+		tmp = tree->argv;
+		while (tmp != NULL)
+		{
+			rtn_val = expand_env_in_str_and_unquote(&(tmp->line), our_env, exit_status);
+			if (rtn_val < 0)
+				return (rtn_val);
+			tmp = tmp->next;
+		}
 	}
 	rtn_val = expand_env(tree->left, our_env, exit_status);
 	if (rtn_val < 0)
