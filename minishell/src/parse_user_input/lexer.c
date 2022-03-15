@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:34:02 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/11 13:47:21 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/15 15:45:11 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ static int	get_token_type(char *token)
 		return (T_WORD);
 }
 
-/*
-*	parameter	: splitted user input (char **), token address (t_token **)
-*	description : 
-*	return		: 0 if success, 1 if fail
-*/
 int	lexer(t_list *splitted, t_token **tokens)
 {
 	int		i;

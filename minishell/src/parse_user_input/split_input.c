@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 15:46:07 by jaemoojung        #+#    #+#             */
+/*   Updated: 2022/03/15 15:46:17 by jaemoojung       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static bool	m_is_sign(char c)
@@ -81,26 +93,3 @@ int	split_input(char const *input, t_list **splitted)
 	}
 	return (0);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	t_list	*result;
-// 	t_list	*temp;
-
-// 	if (ac != 2)
-// 		return (0);
-// 	result = split_input(av[1]);
-// 	if (result == NULL)
-// 	{
-// 		printf("Error: unclosed quotation\n");
-// 		return (0);
-// 	}
-// 	temp = result;
-// 	while (temp != NULL)
-// 	{
-// 		printf("%s\n", temp->line);
-// 		temp = temp->next;
-// 	}
-// 	ft_free_lst(result);
-// 	return (0);
-// }

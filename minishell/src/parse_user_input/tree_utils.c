@@ -6,13 +6,11 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 17:48:43 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/15 12:50:14 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/15 15:46:33 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//TODO: 트리 할당 실패했을 때 에러처리 어케할건지?
 
 t_ast_node	*make_ast_node(int node_type, char *file_path, t_list *argv)
 {
@@ -28,23 +26,6 @@ t_ast_node	*make_ast_node(int node_type, char *file_path, t_list *argv)
 	node->right = NULL;
 	return (node);
 }
-
-// t_ast_node	*ast_insert(t_ast_node *root, t_token *token, int side)
-// {
-// 	if (root == NULL)
-// 	{
-// 		root = make_ast_node(token);
-// 		return (root);
-// 	}
-// 	else
-// 	{
-// 		if (root->left == NULL)
-// 			root->left = ast_insert(root->left, token, side);
-// 		else
-// 			root->right = ast_insert(root->right, token, side);
-// 		return (root);
-// 	}
-// }
 
 t_ast_node	*ast_insert_node(t_ast_node *root, t_ast_node *node, int side)
 {
