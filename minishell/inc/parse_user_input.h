@@ -35,7 +35,8 @@ typedef struct s_token
 typedef struct s_ast_node
 {
 	int				node_type;
-	char			*content;
+	char			*file_path;
+	t_list			*argv;
 	t_ast_node		*left;
 	t_ast_node		*right;
 }	t_ast_node;
@@ -48,10 +49,10 @@ void		ft_free_split(char **splitted, int index);
 char		*j_strdup(const char *s1);
 char		*j_strjoin(char const *s1, char const *s2);
 char		*conv_str_join(char *argv, char *new_str);
-char		*make_argv(t_token **tokens);
+t_list		*make_argv(t_token **token);
 void		print_parsed(t_ast_node *tree);
 
-t_ast_node	*make_ast_node(int node_type, char *content);
+t_ast_node	*make_ast_node(int node_type, char *file_path, t_list *argv);
 t_ast_node	*ast_insert(t_ast_node *root, t_token *token, int side);
 t_ast_node	*ast_insert_node(t_ast_node *root, t_ast_node *node, int side);
 void		clear_ast(t_ast_node *root);

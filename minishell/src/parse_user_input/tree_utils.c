@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 17:48:43 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/08 20:49:54 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/15 12:50:14 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //TODO: 트리 할당 실패했을 때 에러처리 어케할건지?
 
-t_ast_node	*make_ast_node(int node_type, char *content)
+t_ast_node	*make_ast_node(int node_type, char *file_path, t_list *argv)
 {
 	t_ast_node	*node;
 
@@ -22,7 +22,8 @@ t_ast_node	*make_ast_node(int node_type, char *content)
 	if (node == NULL)
 		return (NULL);
 	node->node_type = node_type;
-	node->content = content;
+	node->file_path = file_path;
+	node->argv = argv;
 	node->left = NULL;
 	node->right = NULL;
 	return (node);
@@ -68,10 +69,15 @@ void	clear_ast(t_ast_node *root)
 		return ;
 	clear_ast(root->left);
 	clear_ast(root->right);
-	if (root->content != NULL)
+	if (root->file_path != NULL)
 	{
-		free(root->content);
-		root->content = NULL;
+		free(root->file_path);
+		root->file_path = NULL;
+	}
+	if (root->argv != NULL)
+	{
+		ft_free_lst(root->argv);
+		root->argv = NULL;
 	}
 	free(root);
 	root = NULL;
