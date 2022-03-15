@@ -69,6 +69,7 @@ int	builtin_or_not(t_list *content, t_info *info)
 	int		(*builtins[8])(char **, t_list *);
 
 	ft_lstadd_back(&content, info->remainder);
+	info->remainder = NULL;
 	chunk = to_vector(content);
 	if (chunk == NULL)
 		return (FAILURE);

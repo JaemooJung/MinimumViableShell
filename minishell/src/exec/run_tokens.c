@@ -39,8 +39,8 @@ static void	init_info(t_info *info)
 
 static void	clear_info(t_info *info)
 {
-//	if (info->remainder != NULL)
-//		ft_free_lst(info->remainder);
+	if (info->remainder != NULL)
+		ft_free_lst(info->remainder);
 	if (info->fd[0] != -1)
 		close(info->fd[0]);
 	if (info->fd[1] != -1)

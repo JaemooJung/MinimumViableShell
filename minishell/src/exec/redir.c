@@ -68,6 +68,7 @@ int	redir_n_join_remainder(t_list *content, t_info *info)
 	{
 		ft_lstadd_back(&info->remainder, content->next);
 		content->next = NULL;
+		ft_print_lst(info->remainder);
 	}
 	if (info->prev_dir == IN_REDIR || info->prev_dir == IN_HEREDOC)
 	{
