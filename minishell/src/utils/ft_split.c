@@ -49,22 +49,6 @@ static int	get_si(int *i, char const *s, char c)
 	return (size);
 }
 
-
-// void	ft_free_split(char **big, int bigdex)
-// {
-// 	int	index;
-
-// 	index = bigdex - 1;
-// 	while (index >= 0)
-// 	{
-// 		free(big[index]);
-// 		big[index] = 0;
-// 		--index;
-// 	}
-// 	free(big);
-// 	big = 0;
-// }
-
 static void	go_split(char **big, char const *s, char c, int bigdex)
 {
 	int	i;

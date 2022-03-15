@@ -161,8 +161,8 @@ void	minimum_viable_shell(t_list *env)
 		ft_free_str(cmdline);
 		return ;
 	}
-	print_parsed(tree);
-//	collect_remainders(tree);
+//	print_parsed(tree);
+	collect_remainders(tree);
 //	print_parsed(tree);
 	run_tokens(tree, env, &exit_status);
 	clear_ast(tree);
@@ -184,9 +184,9 @@ int	main(int argc, char **argv, char **envp)
 	signal_handler_init();
 	our_env = envp_to_ours(envp);
 	if (our_env == NULL)
-		;
+		exit(ft_print_error(NULL, NULL, "Fatal error: initialization failed."));
 	if (add_shlvl(our_env) == FAILURE)
-		;
+		exit(ft_print_error(NULL, NULL, "Fatal error: initialization failed."));
 	while (1)
 		minimum_viable_shell(our_env);
 }

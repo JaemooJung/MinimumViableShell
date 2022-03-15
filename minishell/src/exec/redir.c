@@ -45,6 +45,8 @@ static int	input_redir(char *content, t_info *info)
 	}
 	else if (info->prev_dir == IN_HEREDOC)
 	{
+		if (dup2(info->origin[0], STDIN_FILENO) == -1)
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 		info->fd[INFILE] = mvs_open("mvs_temp", WRITE);
 		here_doc(info->fd[INFILE], content);
 		if (info->fd[INFILE] == -1)

@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 t_list	*ft_lstlast(t_list *lst)
@@ -58,7 +57,7 @@ void	*ft_free_lst(t_list *lst)
 {
 	t_list	*temp;
 
-	if (!lst) 
+	if (!lst)
 		return (NULL);
 	while (lst->next != NULL)
 	{
