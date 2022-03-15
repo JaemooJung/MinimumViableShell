@@ -40,7 +40,8 @@ static void	free_vector(char **vector)
 	free(vector);
 }
 
-int	parse_user_input(const char *input, t_ast_node **tree, t_list *our_env, int exit_status)
+int	parse_user_input(const char *input, t_ast_node **tree,
+	t_list *our_env, int exit_status)
 {
 	t_list	*splitted;
 	t_token	*tokens;
@@ -57,7 +58,6 @@ int	parse_user_input(const char *input, t_ast_node **tree, t_list *our_env, int 
 	}
 	lexer(splitted, &tokens);
 	tmp = tokens;
-//	debug_print_tokens(tmp);
 	parser(&tmp, tree);
 	rtn = expand_env(*tree, our_env, exit_status);
 	free_tokens(tokens);

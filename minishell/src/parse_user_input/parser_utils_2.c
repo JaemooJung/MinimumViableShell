@@ -16,7 +16,7 @@ t_list	*make_argv(t_token **token)
 {
 	t_list	*argv;
 	t_list	*tmp;
-	
+
 	argv = NULL;
 	while ((*token)->type == T_WORD)
 	{

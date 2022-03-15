@@ -63,18 +63,3 @@ int	ft_atoi(const char *str)
 		return (0);
 	return ((int)result * plma);
 }
-
-void	dequote(char *str)
-{
-	int	i;
-
-	if (!(str[0] == '\"' && str[ft_strlen(str) - 1] == '\"'))
-		return ;
-	i = 1;
-	while (i < ft_strlen(str) - 1)
-	{
-		str[i - 1] = str[i];
-		++i;
-	}
-	str[i] = '\0';
-}

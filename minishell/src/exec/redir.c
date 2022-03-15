@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 15:42:43 by hakim             #+#    #+#             */
+/*   Updated: 2022/03/15 15:42:45 by hakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	teach_me_direction(char *content, t_info *info)
@@ -63,22 +75,25 @@ static int	output_redir(char *content, t_info *info)
 int	redir_n_join_remainder(t_list *content, t_info *info)
 {
 	int	fd;
+	int	stat;
 
+	stat = SUCCESS;
 	if (ft_lstsize(content) > 1)
 	{
 		ft_lstadd_back(&info->remainder, content->next);
 		content->next = NULL;
-		ft_print_lst(info->remainder);
 	}
 	if (info->prev_dir == IN_REDIR || info->prev_dir == IN_HEREDOC)
 	{
 		if (input_redir(content->line, info) == FAILURE)
-			return (FAILURE);
+			stat = FAILURE;
 	}
 	else if (info->prev_dir == OUT_REDIR || info->prev_dir == OUT_APPEND)
 	{
 		if (output_redir(content->line, info) == FAILURE)
-			return (FAILURE);
+			stat = FAILURE;
 	}
-	return (SUCCESS);
+	if (stat == FAILURE)
+		info->pipeexists = false;
+	return (stat);
 }

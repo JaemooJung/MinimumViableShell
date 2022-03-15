@@ -61,7 +61,7 @@ int	mvs_exit(char **chunk, t_list *env)
 	{
 		ft_putstr_fd("exit\nminishell: exit: ", 2);
 		ft_putstr_fd(chunk[1], 2);
-		ft_putendl_fd("numeric argument required", 2);
+		ft_putendl_fd(" numeric argument required", 2);
 		exit(255);
 	}
 	ft_putendl_fd("exit", 1);

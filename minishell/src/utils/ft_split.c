@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 16:06:15 by hakim             #+#    #+#             */
+/*   Updated: 2022/03/15 16:06:17 by hakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	wordcount(char const *s, char c)
@@ -47,6 +59,21 @@ static int	get_si(int *i, char const *s, char c)
 		*i += 1;
 	}
 	return (size);
+}
+
+static void	ft_free_split(char **splitted, int index)
+{
+	int	i;
+
+	i = 0;
+	while (i < index)
+	{
+		free(splitted[i]);
+		splitted[i] = 0;
+		++i;
+	}
+	free(splitted);
+	splitted = 0;
 }
 
 static void	go_split(char **big, char const *s, char c, int bigdex)

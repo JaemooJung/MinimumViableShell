@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	handle_sigint(pid_t pid)
+static void	handle_sigint(pid_t pid)
 {
 	if (pid == -1)
 	{
@@ -23,11 +23,11 @@ void	handle_sigint(pid_t pid)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else
-		ft_putstr_fd("\n", 2);
+//	else
+//		ft_putstr_fd("\n", 2);
 }
 
-void	handle_sigquit(pid_t pid)
+static void	handle_sigquit(pid_t pid)
 {
 	if (pid == -1)
 	{
@@ -36,10 +36,10 @@ void	handle_sigquit(pid_t pid)
 		ft_putstr_fd("  \b\b", 2);
 	}
 	else
-		ft_putstr_fd("Quit: 3\n", 2);
+		ft_putstr_fd("^\\Quit: v3\n", 2);
 }
 
-void	signal_handler(int signo)
+static void	signal_handler(int signo)
 {
 	pid_t	pid;
 	int		status;

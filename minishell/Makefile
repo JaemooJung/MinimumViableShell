@@ -2,17 +2,15 @@ NAME 		=	minishell
 
 CC 			=	gcc
 CFLAGS		=	-g
-RL_LINK		=	-lreadline -L/usr/local/opt/readline/lib
-RL_INCLUDE	=	-I/usr/local/opt/readline/include
-#RL_LINK	=	-L/opt/homebrew/opt/readline/lib -lreadline 
-#RL_INCLUDE	=	-I/opt/homebrew/opt/readline/include
+#RL_LINK	=	-lreadline -L/usr/local/opt/readline/lib
+#RL_INCLUDE	=	-I/usr/local/opt/readline/include
+RL_LINK		=	-L/opt/homebrew/opt/readline/lib -lreadline
+RL_INCLUDE	=	-I/opt/homebrew/opt/readline/include
 RM			=	rm -f
 
 FILES 		=	main.c \
 				parse_user_input/parse_user_input.c \
 				parse_user_input/split_input.c \
-				parse_user_input/mvs_split.c \
-				parse_user_input/mvs_split_utils.c \
 				parse_user_input/lexer.c \
 				parse_user_input/parser.c \
 				parse_user_input/parser_funcs.c \
@@ -47,6 +45,7 @@ FILES 		=	main.c \
 				exec/redir_utils.c \
 				exec/redir.c \
 				exec/run_tokens.c \
+				exception_collector.c \
 
 SRC_DIR		=	./src/
 INC_DIR		=	./inc

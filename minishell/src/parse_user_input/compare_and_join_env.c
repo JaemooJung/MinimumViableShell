@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*compare_name_and_env(const char *name, char *env)
+static char	*compare_name_and_env(const char *name, char *env)
 {
 	while (*name && *env)
 	{
@@ -27,7 +27,7 @@ char	*compare_name_and_env(const char *name, char *env)
 		return (NULL);
 }
 
-char	*get_env_string(const char *name, t_list *our_env)
+static char	*get_env_string(const char *name, t_list *our_env)
 {
 	t_list	*env_list;
 	char	*env_string;
@@ -45,7 +45,7 @@ char	*get_env_string(const char *name, t_list *our_env)
 	return (ft_strdup(""));
 }
 
-int	get_env_name_len(char *name)
+static int	get_env_name_len(char *name)
 {
 	int	i;
 
@@ -55,7 +55,8 @@ int	get_env_name_len(char *name)
 	return (i);
 }
 
-int	join_env_string(char **str, char *env_string, int dollar_idx, int name_len)
+static int	join_env_string(char **str, char *env_string,
+				int dollar_idx, int name_len)
 {
 	char	*fore;
 	char	*back;
@@ -89,8 +90,7 @@ int	compare_and_join_env(char **str_to_expand, t_list *our_env,
 		if (env_string == NULL)
 			return (MALLOC_ERR);
 		join_env_string(str_to_expand, env_string, i, 1);
-		ft_free_str(env_string);
-		return (0);
+		return (!ft_free_str(env_string));
 	}
 	name_len = get_env_name_len(*str_to_expand + i + 1);
 	if (name_len == 0)
@@ -104,6 +104,5 @@ int	compare_and_join_env(char **str_to_expand, t_list *our_env,
 		join_env_string(str_to_expand, env_string, i, name_len);
 		ft_free_str(env_string);
 	}
-	ft_free_str(name);
-	return (0);
+	return (!ft_free_str(name));
 }
