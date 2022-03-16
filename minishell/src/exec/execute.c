@@ -90,6 +90,8 @@ int	builtin_or_not(t_list *content, t_info *info)
 	int		builtin;
 	int		(*builtins[8])(char **, t_list *);
 
+	if (content == NULL)
+		return (SUCCESS);
 	ft_lstadd_back(&content, info->remainder);
 	info->remainder = NULL;
 	chunk = to_vector(content);

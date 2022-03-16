@@ -53,7 +53,7 @@ static void	minimum_viable_shell(t_list *env)
 	int			err_code;
 
 	tree = NULL;
-	cmdline = readline("\033[1;32mminishell $ \033[0m");
+	cmdline = readline("minishell $ ");
 	if (cmdline == NULL)
 		apocalypse();
 	if (cmdline[0] != '\0')

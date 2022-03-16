@@ -62,7 +62,8 @@ void	search_for_remainder(t_ast_node *node, t_list **remainder)
 		extract_remainder(node->argv, remainder);
 	else if (node->node_type == NODE_FILE_PATH && node->file_path == NULL)
 	{
-		node->file_path = ft_strdup((*remainder)->line);
+		if (*remainder != NULL)
+			node->file_path = ft_strdup((*remainder)->line);
 		if (node->file_path == NULL)
 			return ;
 	}

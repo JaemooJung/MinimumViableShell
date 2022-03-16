@@ -100,6 +100,8 @@ int	get_fullpath(char **content, t_info *info)
 {
 	int	stat;
 
+	if (*content == NULL)
+		return (SUCCESS);
 	if (classify_builtin(*content) != NONE)
 		return (SUCCESS);
 	stat = check_if_dir(*content);
