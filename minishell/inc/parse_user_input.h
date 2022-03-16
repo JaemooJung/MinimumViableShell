@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:46:55 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/16 12:44:06 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 14:04:39 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 # define UNCLOSED_QUOTE -44
 # define UNQUOTE_MALLOC_FAIL -45
+
+# define PARSE_ERROR 258
 
 typedef struct s_ast_node	t_ast_node;
 typedef struct s_list		t_list;

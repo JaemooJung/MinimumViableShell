@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:31:58 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/16 12:01:30 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 14:52:58 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ static void	minimum_viable_shell(t_list *env)
 	err_code = parse_user_input(cmdline, &tree, env, exit_status);
 	if (err_code)
 	{
-		if (err_code == UNCLOSED_QUOTE)
-			printf("ERROR: Unclosed quote\n");
+		handle_parse_error(err_code, &exit_status);
 		clear_ast(tree);
 		ft_free_str(cmdline);
 		return ;

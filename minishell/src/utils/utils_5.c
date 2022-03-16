@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:06:34 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/15 16:06:35 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/16 14:56:10 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,15 @@ char	*ft_itoa(int n)
 		--index;
 	}
 	return (result);
+}
+
+void	handle_parse_error(int err_code, int *exit_status)
+{
+	if (err_code == UNCLOSED_QUOTE)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("Unclosed quote\n", 2);
+	}
+	else if (err_code == PARSE_ERROR)
+		*exit_status = err_code;
 }

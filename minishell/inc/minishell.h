@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:30:21 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/16 12:32:29 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 14:54:22 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	ft_free_vector(char **vector);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
+void	handle_parse_error(int err_code, int *exit_status);
 
 /* list */
 t_list	*ft_lstnew(char *line);
