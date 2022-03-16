@@ -12,18 +12,6 @@
 
 #include "minishell.h"
 
-static int	open_for_check(char *path)
-{
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	close(fd);
-	if (fd >= 0)
-		return (SUCCESS);
-	else
-		return (FAILURE);
-}
-
 static int	check_if_dir(char *path)
 {
 	int	fd;
