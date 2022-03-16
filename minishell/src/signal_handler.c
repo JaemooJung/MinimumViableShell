@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:46:40 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/16 12:33:44 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 16:26:02 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	handle_sigquit(pid_t pid)
 		ft_putstr_fd("  \b\b", 2);
 	}
 	else
-		ft_putstr_fd("^\\Quit: v3\n", 2);
+		ft_putstr_fd("^\\Quit: 3\n", 2);
 }
 
 static void	signal_handler(int signo)

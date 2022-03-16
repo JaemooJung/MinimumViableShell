@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:42:28 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/15 15:42:34 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/16 16:22:27 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	do_child_proc(t_info *info, char **chunk)
 		exit(builtins[builtin](chunk, info->env));
 	else if (chunk[0][0] == '.' && chunk[0][1] == '/'
 		&& execve(chunk[0], chunk, envp) == -1)
-		exit(126 + ft_print_error(chunk[0], NULL, "Permission denied"));
+		exit(125 + ft_print_error(chunk[0], NULL, "Permission denied"));
 	execve(info->fullpath, chunk, envp);
 	if (execve(chunk[0], chunk, envp) == -1)
 		exit(126 + ft_print_error("command not found", NULL, chunk[0]));

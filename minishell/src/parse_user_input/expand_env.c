@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:45:04 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/16 12:46:52 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 16:52:06 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static int	unquote_str(char **str_to_expand, int i,
 				compare_and_join_env(&quoted_str, our_env, j, exit_status);
 			if (quoted_str[j] != '$')
 				j++;
+			else if (quoted_str[j] == '$' && (!ft_isalnum(quoted_str[j + 1])))
+				j++;
 		}
 	}
 	return (join_unquoted_string(str_to_expand, quoted_str, i, quote_str_len));
@@ -80,7 +82,9 @@ static int	expand_env_in_str_and_unquote(char **str, t_list *our_env,
 				return (i);
 			continue ;
 		}
-		if ((*str)[i] != '$')
+		if ((*str)[i] != '$' && (*str)[i])
+			i++;
+		else if ((*str)[i] == '$' && (!ft_isalnum((*str)[i + 1])))
 			i++;
 	}
 	return (0);
