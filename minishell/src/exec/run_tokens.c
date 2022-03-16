@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_tokens.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 15:42:49 by hakim             #+#    #+#             */
+/*   Updated: 2022/03/15 15:42:51 by hakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	execute_tree(t_ast_node *node, t_info *info)
 {
-	if (node->node_type == NODE_PIPE && node->right != NULL)
+	if (node->node_type == NODE_PIPE)
 	{
 		info->mid_status = SUCCESS;
-		info->mid_status = lets_pipe(info);
+		if (node->right != NULL)
+			info->mid_status = lets_pipe(info);
 	}
 	else if (info->mid_status == SUCCESS && node->node_type == NODE_REDIR_TYPE)
 		info->mid_status = teach_me_direction(node->file_path, info);
@@ -68,6 +81,9 @@ void	run_tokens(t_ast_node *node, t_list *env, int *exit_status)
 		if (unlink("mvs_temp") == -1)
 			ft_print_error(NULL, NULL, strerror(errno));
 	}
-	*exit_status = info.exit_status;
+	if (info.mid_status != SUCCESS)
+		*exit_status = info.mid_status;
+	else
+		*exit_status = info.exit_status;
 	clear_info(&info);
 }

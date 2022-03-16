@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 18:30:21 by hakim             #+#    #+#             */
+/*   Updated: 2022/03/15 18:30:22 by hakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -13,10 +25,6 @@
 # include <termios.h>
 # include "parse_user_input.h"
 # include "debug.h"
-
-# define SPACE ' '
-# define SQUOTE '\''
-# define DQUOTE '\"'
 
 # define INFILE 0
 # define OUTFILE 1
@@ -65,11 +73,11 @@ typedef struct s_list
 typedef struct s_necessities
 {
 	int		mid_status;
-	int 	exit_status;
+	int		exit_status;
 	int		pipe[2];
-	int 	fd[2];
-	int 	origin[2];
-	int 	prev_dir;
+	int		fd[2];
+	int		origin[2];
+	int		prev_dir;
 	bool	pipeexists;
 	bool	wasthereanypipe;
 	char	*fullpath;
@@ -77,7 +85,7 @@ typedef struct s_necessities
 	t_list	*env;
 }	t_info;
 
-void	collect_remainders(t_ast_node *tree);
+void	search_for_remainder(t_ast_node *node, t_list **remainder);
 
 /* envp friends */
 t_list	*envp_to_ours(char **envp);
@@ -87,8 +95,8 @@ int		add_shlvl(t_list *env);
 char	**to_vector(t_list *env);
 /* builtins */
 int		mvs_echo(char **chunk, t_list *env);
-int		mvs_exit(char **chunk, t_list *env); // is whitespace func necessary? + dequote have to be removed after parsing done
-int		mvs_cd(char **chunk, t_list *env); // error handling to be done
+int		mvs_exit(char **chunk, t_list *env);
+int		mvs_cd(char **chunk, t_list *env);
 int		mvs_pwd(char **chunk, t_list *env);
 int		mvs_env(char **chunk, t_list *env);
 int		mvs_export(char **chunk, t_list *env);
@@ -111,7 +119,6 @@ void	ft_putendl_fd(char *s, int fd);
 int		ft_print_error(char *cmd, char *arg, char *error);
 int		ft_free_str(char *str);
 void	ft_free_vector(char **vector);
-void	dequote(char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
@@ -127,6 +134,7 @@ void	*ft_free_lst(t_list *lst);
 size_t	ft_lstsize(t_list *lst);
 
 /* exec */
+void	run_tokens(t_ast_node *node, t_list *env, int *exit_status);
 int		keep_stdio(int *origin);
 int		restore_stdio(int *origin);
 int		lets_pipe(t_info *info);
@@ -137,13 +145,7 @@ int		teach_me_direction(char *content, t_info *info);
 int		redir_n_join_remainder(t_list *content, t_info *info);
 int		get_fullpath(char **content, t_info *info);
 
-/* ?????? */
-void run_tokens(t_ast_node *node, t_list *env, int *exit_status);
-
-/* signal */
 void	signal_handler_init(void);
 void	signal_waiting_for_new_shell(void);
-
-void	ft_print_lst(t_list *lst);
 
 #endif

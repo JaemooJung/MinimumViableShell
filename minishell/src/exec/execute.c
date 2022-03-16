@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 15:42:28 by hakim             #+#    #+#             */
+/*   Updated: 2022/03/15 15:42:34 by hakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	do_child_proc(t_info *info, char **chunk)
@@ -39,10 +51,17 @@ static int	do_parent_proc(char *cmd, pid_t pid, t_info *info)
 		&& ft_strncmp(cmd, "./minishell", 11) == 0)
 		signal_waiting_for_new_shell();
 	waitpid(pid, &status, 0);
+	if (WTERMSIG(status) != 0)
+	{
+		if (WTERMSIG(status) == 2)
+			printf("^C\n");
+		info->exit_status = 128 + WTERMSIG(status);
+	}
+	else
+		info->exit_status = WEXITSTATUS(status);
 	signal_handler_init();
 	if (info->pipeexists)
 		close(info->pipe[0]);
-	info->exit_status = WEXITSTATUS(status);
 	return (SUCCESS);
 }
 

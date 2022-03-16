@@ -24,7 +24,8 @@ int	parse_command(t_ast_node **root, t_token **tokens)
 	*root = ast_insert_node(*root, command, RIGHT);
 	if ((*tokens)->type == T_WORD)
 	{
-		file_path = make_ast_node(NODE_FILE_PATH, j_strdup((*tokens)->value), NULL);
+		file_path = make_ast_node(NODE_FILE_PATH, \
+		j_strdup((*tokens)->value), NULL);
 		argv = make_ast_node(NODE_ARGV, NULL, make_argv(tokens));
 		if (file_path->file_path == NULL || argv->argv == NULL)
 			return (MALLOC_ERR);
