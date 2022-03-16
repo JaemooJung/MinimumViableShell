@@ -145,6 +145,7 @@ int		mvs_open(char *file, int mode);
 int		teach_me_direction(char *content, t_info *info);
 int		redir_n_join_remainder(t_list *content, t_info *info);
 int		get_fullpath(char **content, t_info *info);
+int		open_for_check(char *path);
 
 void	signal_handler_init(void);
 void	signal_waiting_for_new_shell(void);
