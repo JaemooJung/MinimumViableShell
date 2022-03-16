@@ -48,6 +48,7 @@ static void	init_info(t_info *info)
 	info->remainder = NULL;
 	info->fd[0] = -1;
 	info->fd[1] = -1;
+	info->temp_fd = -1;
 }
 
 static void	clear_info(t_info *info)
@@ -58,6 +59,8 @@ static void	clear_info(t_info *info)
 		close(info->fd[0]);
 	if (info->fd[1] != -1)
 		close(info->fd[1]);
+	if (info->temp_fd != -1)
+		close(info->temp_fd);
 	close(info->origin[0]);
 	close(info->origin[1]);
 }

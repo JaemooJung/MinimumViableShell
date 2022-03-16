@@ -61,3 +61,18 @@ int	here_doc(int infile, char *limiter)
 		return (FAILURE);
 	return (SUCCESS);
 }
+
+int	teach_me_direction(char *content, t_info *info)
+{
+	if (ft_strncmp(content, "<", 2) == 0)
+		info->prev_dir = IN_REDIR;
+	else if (ft_strncmp(content, "<<", 3) == 0)
+		info->prev_dir = IN_HEREDOC;
+	else if (ft_strncmp(content, ">", 2) == 0)
+		info->prev_dir = OUT_REDIR;
+	else if (ft_strncmp(content, ">>", 3) == 0)
+		info->prev_dir = OUT_APPEND;
+	else
+		return (FAILURE);
+	return (SUCCESS);
+}
