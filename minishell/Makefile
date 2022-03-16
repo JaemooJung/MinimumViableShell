@@ -62,6 +62,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(RL_LINK) -o $@ $^
+	stty -echoctl
 
 clean:
 	$(RM) $(OBJS)

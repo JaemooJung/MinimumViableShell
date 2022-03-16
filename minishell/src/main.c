@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:31:58 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/16 14:52:58 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 17:56:06 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	minimum_viable_shell(t_list *env)
 	int			err_code;
 
 	tree = NULL;
-	cmdline = readline("\033[1;32mminishell $ \033[0m");
+	cmdline = readline("minishell $ ");
 	if (cmdline == NULL)
 		apocalypse();
 	if (cmdline[0] != '\0')
