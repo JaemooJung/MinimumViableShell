@@ -77,6 +77,7 @@ typedef struct s_necessities
 	int		pipe[2];
 	int		fd[2];
 	int		origin[2];
+	int		temp_fd;
 	int		prev_dir;
 	bool	pipeexists;
 	bool	wasthereanypipe;
