@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exception_collector.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:50:18 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/15 17:50:24 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/16 12:06:41 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ static void	extract_remainder(t_list *content, t_list **remainder)
 
 static int	open_nodes(t_ast_node *node)
 {
-	char	**temp;
-	int		i;
-
-	i = 0;
 	if (node->left->left->right)
 	{
 		if (ft_lstsize(node->left->left->right->argv) < 2)

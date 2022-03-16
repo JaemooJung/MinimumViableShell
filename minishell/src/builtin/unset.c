@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:34:55 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/01 14:34:56 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/16 12:04:13 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	mvs_unset(char **chunk, t_list *env)
 {
 	int		index;
 	int		exit_status;
-	t_list	*origin;
 
 	index = 1;
 	exit_status = SUCCESS;

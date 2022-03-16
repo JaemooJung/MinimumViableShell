@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:34:31 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/01 14:34:33 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/16 12:03:04 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	mvs_cd(char **chunk, t_list *env)
 {
 	int		exit_status;
 	char	*pwd;
-	char	*temp;
 
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)

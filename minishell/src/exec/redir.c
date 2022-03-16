@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:42:43 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/15 15:42:45 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/16 12:06:05 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static int	output_redir(char *content, t_info *info)
 
 int	redir_n_join_remainder(t_list *content, t_info *info)
 {
-	int	fd;
 	int	stat;
 
 	stat = SUCCESS;

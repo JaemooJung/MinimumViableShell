@@ -1,11 +1,11 @@
 NAME 		=	minishell
 
 CC 			=	gcc
-CFLAGS		=	-g
-#RL_LINK	=	-lreadline -L/usr/local/opt/readline/lib
-#RL_INCLUDE	=	-I/usr/local/opt/readline/include
-RL_LINK		=	-L/opt/homebrew/opt/readline/lib -lreadline
-RL_INCLUDE	=	-I/opt/homebrew/opt/readline/include
+CFLAGS		=	-g -Wall -Werror -Wextra
+RL_LINK	=	-lreadline -L/usr/local/opt/readline/lib
+RL_INCLUDE	=	-I/usr/local/opt/readline/include
+# RL_LINK		=	-L/opt/homebrew/opt/readline/lib -lreadline
+# RL_INCLUDE	=	-I/opt/homebrew/opt/readline/include
 RM			=	rm -f
 
 FILES 		=	main.c \
@@ -19,6 +19,7 @@ FILES 		=	main.c \
 				parse_user_input/tree_utils.c \
 				parse_user_input/compare_and_join_env.c \
 				parse_user_input/expand_env.c \
+				parse_user_input/expand_env_utils.c \
 				builtin/cd.c \
 				builtin/echo.c \
 				builtin/env.c \
@@ -38,7 +39,6 @@ FILES 		=	main.c \
 				utils/utils_5.c \
 				our_env.c \
 				signal_handler.c \
-				debug/debug_print.c \
 				exec/execute.c \
 				exec/path.c \
 				exec/pipe_n_dup.c \

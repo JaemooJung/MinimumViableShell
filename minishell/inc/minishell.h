@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakim <hakim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:30:21 by hakim             #+#    #+#             */
-/*   Updated: 2022/03/15 18:30:22 by hakim            ###   ########.fr       */
+/*   Updated: 2022/03/16 12:32:29 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <fcntl.h>
 # include <termios.h>
 # include "parse_user_input.h"
-# include "debug.h"
 
 # define INFILE 0
 # define OUTFILE 1

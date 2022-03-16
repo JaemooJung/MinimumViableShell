@@ -6,21 +6,11 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:34:02 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/15 15:45:11 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 12:02:19 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	get_vector_size(char **vector)
-{
-	int	i;
-
-	i = 0;
-	while (vector[i])
-		++i;
-	return (i);
-}
 
 static int	get_token_type(char *token)
 {

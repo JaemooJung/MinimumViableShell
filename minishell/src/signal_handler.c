@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:46:40 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/15 15:46:40 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 12:33:44 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static void	handle_sigint(pid_t pid)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-//	else
-//		ft_putstr_fd("\n", 2);
 }
 
 static void	handle_sigquit(pid_t pid)

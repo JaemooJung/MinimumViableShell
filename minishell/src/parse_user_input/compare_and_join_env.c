@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:44:59 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/15 15:45:29 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 12:35:31 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static int	join_env_string(char **str, char *env_string,
 {
 	char	*fore;
 	char	*back;
-	char	*tmp;
 	char	*fore_and_env;
 	char	*full_str;
 

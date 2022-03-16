@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:45:35 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/15 15:45:37 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 12:02:02 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,6 @@ static void	free_tokens(t_token *tokens)
 		i++;
 	}
 	free(tokens);
-}
-
-static void	free_vector(char **vector)
-{
-	int	i;
-
-	i = 0;
-	while (vector[i])
-	{
-		free(vector[i]);
-		vector[i] = NULL;
-		i++;
-	}
-	free(vector);
 }
 
 int	parse_user_input(const char *input, t_ast_node **tree,

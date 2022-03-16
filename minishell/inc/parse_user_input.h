@@ -6,7 +6,7 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:46:55 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/15 15:46:55 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 12:44:06 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int			lexer(t_list *splitted, t_token **tokens);
 int			parse_pipeline(t_ast_node **root, t_token **tokens);
 int			parser(t_token **tokens, t_ast_node **tree);
 
+int			get_quote_strlen(const char *str, char quote);
 int			compare_and_join_env(char **str_to_expand,
 				t_list *our_env, int i, int exit_status);
 int			expand_env(t_ast_node *tree, t_list *our_env, int exit_status);

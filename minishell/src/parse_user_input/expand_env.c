@@ -6,23 +6,11 @@
 /*   By: jaemoojung <jaemoojung@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:45:04 by jaemoojung        #+#    #+#             */
-/*   Updated: 2022/03/15 15:45:23 by jaemoojung       ###   ########.fr       */
+/*   Updated: 2022/03/16 12:46:52 by jaemoojung       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	get_quote_strlen(const char *str, char quote)
-{
-	int	i;
-
-	i = 1;
-	while (str[i] && str[i] != quote)
-		i++;
-	if (str[i] == '\0')
-		return (UNCLOSED_QUOTE);
-	return (i);
-}
 
 static int	join_unquoted_string(char **str, char *unquoted,
 				int q_idx, int q_len)
@@ -68,7 +56,8 @@ static int	unquote_str(char **str_to_expand, int i,
 		{
 			if (quoted_str[j] == '$')
 				compare_and_join_env(&quoted_str, our_env, j, exit_status);
-			j++;
+			if (quoted_str[j] != '$')
+				j++;
 		}
 	}
 	return (join_unquoted_string(str_to_expand, quoted_str, i, quote_str_len));
@@ -91,7 +80,25 @@ static int	expand_env_in_str_and_unquote(char **str, t_list *our_env,
 				return (i);
 			continue ;
 		}
-		i++;
+		if ((*str)[i] != '$')
+			i++;
+	}
+	return (0);
+}
+
+int	expand_argv(t_list *argv, t_list *our_env, int exit_status)
+{
+	t_list	*tmp;
+	int		rtn_val;
+
+	tmp = argv;
+	while (tmp != NULL)
+	{
+		rtn_val = expand_env_in_str_and_unquote
+			(&(tmp->line), our_env, exit_status);
+		if (rtn_val < 0)
+			return (rtn_val);
+		tmp = tmp->next;
 	}
 	return (0);
 }
@@ -99,7 +106,6 @@ static int	expand_env_in_str_and_unquote(char **str, t_list *our_env,
 int	expand_env(t_ast_node *tree, t_list *our_env, int exit_status)
 {
 	int		rtn_val;
-	t_list	*tmp;
 
 	if (tree == NULL)
 		return (0);
@@ -112,15 +118,9 @@ int	expand_env(t_ast_node *tree, t_list *our_env, int exit_status)
 	}
 	if (tree->argv != NULL)
 	{
-		tmp = tree->argv;
-		while (tmp != NULL)
-		{
-			rtn_val = expand_env_in_str_and_unquote
-				(&(tmp->line), our_env, exit_status);
-			if (rtn_val < 0)
-				return (rtn_val);
-			tmp = tmp->next;
-		}
+		rtn_val = expand_argv(tree->argv, our_env, exit_status);
+		if (rtn_val < 0)
+			return (rtn_val);
 	}
 	rtn_val = expand_env(tree->left, our_env, exit_status);
 	if (rtn_val < 0)
