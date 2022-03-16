@@ -12,42 +12,28 @@
 
 #include "minishell.h"
 
-int	teach_me_direction(char *content, t_info *info)
-{
-	if (ft_strncmp(content, "<", 2) == 0)
-		info->prev_dir = IN_REDIR;
-	else if (ft_strncmp(content, "<<", 3) == 0)
-		info->prev_dir = IN_HEREDOC;
-	else if (ft_strncmp(content, ">", 2) == 0)
-		info->prev_dir = OUT_REDIR;
-	else if (ft_strncmp(content, ">>", 3) == 0)
-		info->prev_dir = OUT_APPEND;
-	else
-		return (FAILURE);
-	return (SUCCESS);
-}
-
 static int	input_redir(char *content, t_info *info)
 {
 	if (info->prev_dir == IN_REDIR)
-	{
 		info->fd[INFILE] = mvs_open(content, READ);
-		if (info->fd[INFILE] == -1)
-			return (ft_print_error(NULL, content, strerror(errno)));
-		if (dup2(info->fd[INFILE], STDIN_FILENO) == -1)
-			return (ft_print_error("Dup didn't work!", NULL, NULL));
-	}
 	else if (info->prev_dir == IN_HEREDOC)
 	{
+		info->temp_fd = dup(STDOUT_FILENO);
+		if (info->temp_fd == -1)
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
 		if (dup2(info->origin[0], STDIN_FILENO) == -1)
+			return (ft_print_error("Dup didn't work!", NULL, NULL));
+		if (dup2(info->origin[1], STDOUT_FILENO) == -1)
 			return (ft_print_error("Dup didn't work!", NULL, NULL));
 		info->fd[INFILE] = mvs_open("mvs_temp", WRITE);
 		here_doc(info->fd[INFILE], content);
-		if (info->fd[INFILE] == -1)
-			return (ft_print_error(NULL, content, strerror(errno)));
-		if (dup2(info->fd[INFILE], STDIN_FILENO) == -1)
+		if (dup2(info->temp_fd, STDOUT_FILENO) == -1)
 			return (ft_print_error("Dup didn't work!", NULL, NULL));
 	}
+	if (info->fd[INFILE] == -1)
+		return (ft_print_error(NULL, content, strerror(errno)));
+	if (dup2(info->fd[INFILE], STDIN_FILENO) == -1)
+		return (ft_print_error("Dup didn't work!", NULL, NULL));
 	return (SUCCESS);
 }
 
