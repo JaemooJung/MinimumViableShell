@@ -31,6 +31,9 @@ static int	do_child_proc(t_info *info, char **chunk)
 	builtin = classify_builtin(chunk[0]);
 	if (builtin != NONE)
 		exit(builtins[builtin](chunk, info->env));
+	else if (chunk[0][0] == '.' && chunk[0][1] == '/'
+		&& execve(chunk[0], chunk, envp) == -1)
+		exit(126 + ft_print_error(chunk[0], NULL, "Permission denied"));
 	execve(info->fullpath, chunk, envp);
 	if (execve(chunk[0], chunk, envp) == -1)
 		exit(126 + ft_print_error("command not found", NULL, chunk[0]));
@@ -51,14 +54,14 @@ static int	do_parent_proc(char *cmd, pid_t pid, t_info *info)
 		&& ft_strncmp(cmd, "./minishell", 11) == 0)
 		signal_waiting_for_new_shell();
 	waitpid(pid, &status, 0);
-	if (((*(int *) &(status)) & 0177) != 0)
+	if (WTERMSIG(status) != 0)
 	{
-		if (((*(int *) &(status)) & 0177) == 2)
+		if (WTERMSIG(status) == 2)
 			printf("^C\n");
-		info->exit_status = 128 + ((*(int *) &(status)) & 0177);
+		info->exit_status = 128 + WTERMSIG(status);
 	}
 	else
-		info->exit_status = (((*(int *) &(status)) >> 8) & 0x000000ff);
+		info->exit_status = WEXITSTATUS(status);
 	signal_handler_init();
 	if (info->pipeexists)
 		close(info->pipe[0]);

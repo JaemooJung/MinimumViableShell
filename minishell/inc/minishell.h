@@ -23,6 +23,7 @@
 # include <readline/history.h>
 # include <fcntl.h>
 # include <termios.h>
+# include <dirent.h>
 # include "parse_user_input.h"
 
 # define INFILE 0

@@ -24,8 +24,8 @@ static int	open_nodes(t_ast_node *node)
 {
 	if (node->left->left->right)
 	{
-		if (ft_lstsize(node->left->left->right->argv) < 2)
-			return (SUCCESS);
+		if (node->right->left != NULL)
+			return (FAILURE);
 		node->right->left = make_ast_node(NODE_FILE_PATH, NULL, NULL);
 		if (node->right->left == NULL)
 			return (FAILURE);

@@ -24,6 +24,27 @@ static int	open_for_check(char *path)
 		return (FAILURE);
 }
 
+static int	check_if_dir(char *path)
+{
+	int	fd;
+	DIR	*dir;
+
+	fd = open(path, O_RDONLY);
+	close(fd);
+	if (fd < 0)
+		return (SUCCESS);
+	if (ft_strchr(path, '/') != NULL)
+	{
+		dir = opendir(path);
+		if (dir == NULL)
+			return (SUCCESS);
+		ft_print_error(path, NULL, "is a directory");
+		closedir(dir);
+		return (126);
+	}
+	return (SUCCESS);
+}
+
 static char	*make_path(char *cmd, char *path)
 {
 	char	*temp;
@@ -93,6 +114,9 @@ int	get_fullpath(char **content, t_info *info)
 
 	if (classify_builtin(*content) != NONE)
 		return (SUCCESS);
+	stat = check_if_dir(*content);
+	if (stat != SUCCESS)
+		return (stat);
 	stat = concat_path(content, info->env, 0);
 	if (stat == SUCCESS)
 		info->fullpath = *content;
