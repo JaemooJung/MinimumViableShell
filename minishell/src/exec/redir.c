@@ -63,6 +63,10 @@ int	redir_n_join_remainder(t_list *content, t_info *info)
 	int	stat;
 
 	stat = SUCCESS;
+	if (info->fd[INFILE] != -1)
+		close(info->fd[INFILE]);
+	if (info->fd[OUTFILE] != -1)
+		close(info->fd[OUTFILE]);
 	if (ft_lstsize(content) > 1)
 	{
 		ft_lstadd_back(&info->remainder, content->next);
