@@ -18,7 +18,7 @@ static bool	is_valid_opt(const char *arg, bool *nlflag, bool *optflag)
 
 	if (*optflag == false)
 		return (false);
-	if (arg[0] != '-')
+	if (arg[0] != '-' || (arg[0] == '-' && arg[1] == '\0'))
 	{
 		*optflag = false;
 		return (false);

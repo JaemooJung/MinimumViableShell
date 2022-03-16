@@ -51,14 +51,14 @@ static int	do_parent_proc(char *cmd, pid_t pid, t_info *info)
 		&& ft_strncmp(cmd, "./minishell", 11) == 0)
 		signal_waiting_for_new_shell();
 	waitpid(pid, &status, 0);
-	if (WTERMSIG(status) != 0)
+	if (((*(int *) &(status)) & 0177) != 0)
 	{
-		if (WTERMSIG(status) == 2)
+		if (((*(int *) &(status)) & 0177) == 2)
 			printf("^C\n");
-		info->exit_status = 128 + WTERMSIG(status);
+		info->exit_status = 128 + ((*(int *) &(status)) & 0177);
 	}
 	else
-		info->exit_status = WEXITSTATUS(status);
+		info->exit_status = (((*(int *) &(status)) >> 8) & 0x000000ff);
 	signal_handler_init();
 	if (info->pipeexists)
 		close(info->pipe[0]);
