@@ -23,8 +23,6 @@ static void	handle_sigint(pid_t pid)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-//	else
-//		ft_putstr_fd("\n", 2);
 }
 
 static void	handle_sigquit(pid_t pid)
